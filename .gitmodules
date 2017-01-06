@@ -1,0 +1,6 @@
+[submodule "EA31337-classes"]
+	path = src/EA31337-classes
+	url = https://github.com/EA31337/EA31337-classes
+[submodule "EA31337-strategies"]
+	path = src/EA31337-strategies
+	url = https://github.com/EA31337/EA31337-strategies
