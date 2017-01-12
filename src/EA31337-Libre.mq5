@@ -147,8 +147,9 @@ void OnTick() {
 
   if (tick_change >= MinPipChangeToTrade) {
     MqlTradeRequest deal;
+    MqlTradeResult result;
     if (strategies.Signal(deal)) {
-      // trade
+      trade.NewOrder(deal, result);
     }
   }
 }
