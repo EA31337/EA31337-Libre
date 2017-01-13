@@ -20,6 +20,11 @@
  */
 
 //+------------------------------------------------------------------+
+//| EA defines.
+//+------------------------------------------------------------------+
+#define __input__
+
+//+------------------------------------------------------------------+
 //| EA includes.
 //+------------------------------------------------------------------+
 #include <EA31337-classes\Account.mqh>
@@ -97,6 +102,7 @@ Trade *trade;
  */
 int OnInit() {
   PrintFormat("%s v%s (%s) initializing...", ea_name, ea_version, ea_link);
+  session_initiated = true;
   session_initiated &= InitClasses();
   session_initiated &= InitVariables();
   session_initiated &= InitStrategies();
@@ -284,4 +290,5 @@ void DeinitVars() {
   delete market;
   delete strategies;
   delete summary_report;
+  delete trade;
 }
