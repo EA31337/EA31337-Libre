@@ -254,11 +254,22 @@ void OnChartEvent(
 bool InitClasses() {
   account = new Account();
   chart = new Chart();
-  market = new Market(_Symbol);
   if (WriteSummaryReport) {
     summary_report = new SummaryReport(account.AccountBalance());
   }
-  trade = new Trade(market, account, logger);
+  // Init Trade class.
+  TradeParams trade_params;
+  trade_params.slippage = 50;
+  trade_params.account = account;
+  trade_params.chart = chart;
+  // Get the pointer to Market class.
+  market = trade.MarketInfo();
+  // Init strategies.
+  StrategiesParams s_params;
+  s_params.tf_filter = TimeframeFilter;
+  s_params.magic_no_start = MagicNumber;
+  strategies = new Strategies(s_params, trade_params);
+  trade = (Trade *) strategies;
   return true;
 }
 
@@ -266,7 +277,7 @@ bool InitClasses() {
  * Init strategies.
  */
 bool InitStrategies() {
-  strategies = new Strategies(TimeframeFilter, MagicNumber);
+
   return true;
 }
 
@@ -275,7 +286,7 @@ bool InitStrategies() {
  */
 bool InitVariables() {
   bool _initiated = true;
-  init_bar_time = market.iTime(_Symbol, 0, 0);
+  init_bar_time = chart.iTime(_Symbol, 0, 0);
   init_spread = market.GetSpreadInPts();
   return _initiated;
 }
