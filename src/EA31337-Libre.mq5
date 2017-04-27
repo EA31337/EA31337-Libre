@@ -155,7 +155,7 @@ void OnTick() {
     MqlTradeRequest deal;
     MqlTradeResult result;
     if (strategies.Signal(deal)) {
-      trade.NewOrder(deal, result);
+      trade.Trades().NewOrder(deal, result);
     }
   }
 }
