@@ -112,7 +112,7 @@ int OnInit() {
   Comment(output);
   ReportAdd(InitInfo());
   */
-  chart.ChartRedraw();
+  chart.WindowRedraw();
   return (session_initiated ? INIT_SUCCEEDED : INIT_FAILED);
 }
 
@@ -128,7 +128,7 @@ void OnDeinit(const int reason) {
       summary_report.CalculateSummary();
       filename = StringFormat(
           "%s-%.0f%s-%s-%s-%dspread-M%d-report.txt",
-          _Symbol, summary_report.init_deposit, account.AccountCurrency(), DateTime::TimeToStr(init_bar_time, TIME_DATE), DateTime::TimeToStr(TimeCurrent(), TIME_DATE), init_spread, _Period);
+          _Symbol, summary_report.GetInitDeposit(), account.AccountCurrency(), DateTime::TimeToStr(init_bar_time, TIME_DATE), DateTime::TimeToStr(TimeCurrent(), TIME_DATE), init_spread, _Period);
       string data = summary_report.GetReport();
       // data += Arrays::ArrToString(logger.GetLogs(), "\n", "Report log:\n");
       Report::WriteReport(filename, data, VerboseLevel >= V_INFO); // Todo: Add: Errors::GetUninitReasonText(reason)
