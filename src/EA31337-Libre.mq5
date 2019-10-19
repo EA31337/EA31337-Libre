@@ -22,15 +22,15 @@
 //+------------------------------------------------------------------+
 //| EA includes.
 //+------------------------------------------------------------------+
-#include "EA31337-classes\Account.mqh"
-#include "EA31337-classes\Chart.mqh"
-#include "EA31337-classes\Collection.mqh"
-#include "EA31337-classes\Log.mqh"
-#include "EA31337-classes\Order.mqh"
-#include "EA31337-classes\Strategy.mqh"
-#include "EA31337-classes\Report.mqh"
-#include "EA31337-classes\SummaryReport.mqh"
-#include "EA31337-classes\Trade.mqh"
+#include "include/EA31337-classes/Account.mqh"
+#include "include/EA31337-classes/Chart.mqh"
+#include "include/EA31337-classes/Collection.mqh"
+#include "include/EA31337-classes/Log.mqh"
+#include "include/EA31337-classes/Order.mqh"
+#include "include/EA31337-classes/Strategy.mqh"
+#include "include/EA31337-classes/Report.mqh"
+#include "include/EA31337-classes/SummaryReport.mqh"
+#include "include/EA31337-classes/Trade.mqh"
 
 //+------------------------------------------------------------------+
 //| Inputs.
@@ -48,10 +48,10 @@ input uint MagicNumber = 31337; // Starting EA magic number
 //+------------------------------------------------------------------+
 #define ea_name    "EA31337 Libre"
 #define ea_version "1.000"
-#define ea_desc    "Multi-strategy advanced trading robot."
-#define ea_link    "https://github.com/EA31337"
+#define ea_desc    "Multi-strategy advanced trading robot"
+#define ea_link    "https://github.com/EA31337/EA31337-Libre"
 #define ea_author  "kenorb"
-#define ea_copy    "Copyright 2016-2017, 31337 Investments Ltd"
+#define ea_copy    "Copyright 2016-2019, 31337 Investments Ltd"
 #define ea_file    __FILE__
 #define ea_date    __DATE__
 #define ea_build   __MQLBUILD__
@@ -61,7 +61,6 @@ input uint MagicNumber = 31337; // Starting EA magic number
 //+------------------------------------------------------------------+
 #property strict
 #property version     ea_version
-#property description ea_name
 #property description ea_desc
 #property link        ea_link
 #property copyright   ea_copy
