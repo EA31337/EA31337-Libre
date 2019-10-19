@@ -1,41 +1,36 @@
 //+------------------------------------------------------------------+
 //|                 EA31337 - multi-strategy advanced trading robot. |
-//|                       Copyright 2016-2017, 31337 Investments Ltd |
+//|                       Copyright 2016-2019, 31337 Investments Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
 
 /*
-    This file is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ *  This file is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-//+------------------------------------------------------------------+
-//| EA defines.
-//+------------------------------------------------------------------+
-#define __input__
 
 //+------------------------------------------------------------------+
 //| EA includes.
 //+------------------------------------------------------------------+
-#include <EA31337-classes\Account.mqh>
-#include <EA31337-classes\Chart.mqh>
-#include <EA31337-classes\Check.mqh>
-#include <EA31337-classes\Log.mqh>
-#include <EA31337-classes\Order.mqh>
-#include <EA31337-classes\Strategies.mqh>
-#include <EA31337-classes\Report.mqh>
-#include <EA31337-classes\SummaryReport.mqh>
-#include <EA31337-classes\Trade.mqh>
+#include "EA31337-classes\Account.mqh"
+#include "EA31337-classes\Chart.mqh"
+#include "EA31337-classes\Collection.mqh"
+#include "EA31337-classes\Log.mqh"
+#include "EA31337-classes\Order.mqh"
+#include "EA31337-classes\Strategy.mqh"
+#include "EA31337-classes\Report.mqh"
+#include "EA31337-classes\SummaryReport.mqh"
+#include "EA31337-classes\Trade.mqh"
 
 //+------------------------------------------------------------------+
 //| Inputs.
@@ -79,23 +74,15 @@ bool session_initiated = false;
 datetime init_bar_time;
 uint init_spread;
 
-//+------------------------------------------------------------------+
-//| Class variables.
-//+------------------------------------------------------------------+
-// User account.
+// Class variables.
 Account *account;
-// Current chart.
 Chart *chart;
-// For logging purposes.
+Collection *strats;
 Log *logger;
-// Market.
 Market *market;
-// Strategy manager.
-Strategies *strategies;
-// For generating the summary report.
-SummaryReport *summary_report;
-// For trading.
-Trade *trade;
+SummaryReport *summary_report; // For summary report.
+Terminal *terminal;
+Trade *trade[FINAL_ENUM_TIMEFRAMES_INDEX];
 
 /**
  * Initialization function of the expert.
@@ -106,12 +93,6 @@ int OnInit() {
   session_initiated &= InitClasses();
   session_initiated &= InitVariables();
   session_initiated &= InitStrategies();
-  /*
-  string output = InitInfo(TRUE);
-  Strings::PrintText(output);
-  Comment(output);
-  ReportAdd(InitInfo());
-  */
   chart.WindowRedraw();
   return (session_initiated ? INIT_SUCCEEDED : INIT_FAILED);
 }
@@ -146,18 +127,37 @@ void OnDeinit(const int reason) {
 void OnTick() {
   if (!session_initiated) return;
 
-  // Check the last price tick change.
-  double last_ask = market.GetLastAsk();
-  double last_bid = market.GetLastBid();
-  double tick_change = fmax(Convert::GetValueDiffInPips(market.GetAsk(), last_ask, True), Convert::GetValueDiffInPips(market.GetBid(), last_bid, True));
-
-  if (tick_change >= MinPipChangeToTrade) {
-    MqlTradeRequest deal;
-    MqlTradeResult result;
-    if (strategies.Signal(deal)) {
-      trade.Trades().NewOrder(deal, result);
+  MqlTick _tick = market.GetTick();
+  bool _tick_procesed = false;
+  for (ENUM_TIMEFRAMES_INDEX tfi = 0; tfi < FINAL_ENUM_TIMEFRAMES_INDEX; tfi++) {
+    if (Object::IsDynamic(trade[tfi]) && trade[tfi].Chart().IsValidTf()) {
+      if (trade[tfi].Chart().IsNewBar()) {
+        trade[tfi].Market().SetTick(_tick);
+        ProcessBar(trade[tfi]);
+        _tick_procesed = true;
+      }
     }
   }
+  if (_tick_procesed) {
+    if (!terminal.IsOptimization()) {
+      terminal.Logger().Flush(false);
+    }
+  }
+}
+
+/**
+ * Process a new bar.
+ */
+void ProcessBar(Trade *_trade) {
+  //if (TradeAllowed()) {
+    //last_ask = market.GetLastAsk();
+    //last_bid = market.GetLastBid();
+    //last_pip_change = market.GetLastPriceChangeInPips();
+    //if (hour_of_day != DateTime::Hour()) {
+    //  StartNewHour(_trade);
+    //}
+    //EA_Trade(_trade);
+  //}
 }
 
 #ifdef __MQL5__
@@ -252,24 +252,32 @@ void OnChartEvent(
  * Init classes.
  */
 bool InitClasses() {
+
+  // Initialize main classes.
   account = new Account();
-  chart = new Chart();
-  if (WriteSummaryReport) {
-    summary_report = new SummaryReport(account.AccountBalance());
+  logger = new Log(V_DEBUG);
+  market = new Market(_Symbol, logger);
+
+  // Initialize the current chart.
+  ENUM_TIMEFRAMES_INDEX _tfi = Chart::TfToIndex(PERIOD_CURRENT);
+  TradeParams trade_params(account, new Chart(_tfi), logger);
+  trade[_tfi] = new Trade(trade_params);
+
+  // Verify that the current chart has been initialized correctly.
+  if (Object::IsDynamic(trade[_tfi]) && trade[_tfi].Chart().IsValidTf()) {
+    // Assign to the current chart.
+    chart = trade[_tfi].Chart();
   }
-  // Init Trade class.
-  TradeParams trade_params;
-  trade_params.slippage = 50;
-  trade_params.account = account;
-  trade_params.chart = chart;
-  // Get the pointer to Market class.
-  market = trade.MarketInfo();
-  // Init strategies.
-  StrategiesParams s_params;
-  s_params.tf_filter = TimeframeFilter;
-  s_params.magic_no_start = MagicNumber;
-  strategies = new Strategies(s_params, trade_params);
-  trade = (Trade *) strategies;
+  else {
+    PrintFormat("%s(): Error: Cannot initialize the current timeframe (%s)!", __FUNCTION_LINE__, Chart::IndexToString(_tfi));
+    return false;
+  }
+
+  // Initialize other classes.
+  terminal = market.TerminalHandler();
+  strats = new Collection();
+  summary_report = new SummaryReport();
+
   return true;
 }
 
@@ -295,11 +303,13 @@ bool InitVariables() {
  * Deinitialize global class variables.
  */
 void DeinitVars() {
-  delete account;
-  delete chart;
-  delete logger;
-  delete market;
-  delete strategies;
-  delete summary_report;
-  delete trade;
+  Object::Delete(account);
+  Object::Delete(logger);
+  Object::Delete(summary_report);
+  Object::Delete(terminal);
+  Object::Delete(market);
+  Object::Delete(strats);
+  for (int tfi = 0; tfi < FINAL_ENUM_TIMEFRAMES_INDEX; tfi++) {
+    Object::Delete(trade[tfi]);
+  }
 }
