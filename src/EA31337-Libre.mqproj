@@ -1,13 +1,13 @@
 {
   "platform"    :"mt5",
   "program_type":"expert",
-  "copyright"   :"Copyright 2016-2017, 31337 Investments Ltd",
+  "copyright"   :"Copyright 2016-2019, 31337 Investments Ltd",
   "link"        :"https:\/\/github.com\/EA31337\/EA31337-Libre",
   "version"     :"1.000",
   "description" :"\nMulti-strategy advanced trading robot",
-  "optimize"    :"1",
+  "optimize"    :"0",
   "fpzerocheck" :"1",
-  "tester_no_cache":"1",
+  "tester_no_cache":"0",
   "tester_everytick_calculate":"0",
 
   "files":
