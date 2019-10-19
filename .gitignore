@@ -1,7 +1,10 @@
-# Ignore compiled binary files.
+# Ignores compiled binary files.
 *.ex4
 *.ex5
 
-# Ignore Finder metadata files on Mac
-.DS_Store
+# Ignores temporary files.
+*.swp
+*~
 
+# Ignores Finder metadata files on Mac
+.DS_Store
