@@ -61,7 +61,10 @@ input uint MagicNumber = 31337; // Starting EA magic number
 //+------------------------------------------------------------------+
 #property strict
 #property version     ea_version
+#ifdef __MQL4__
+#property description ea_name
 #property description ea_desc
+#endif
 #property link        ea_link
 #property copyright   ea_copy
 //#property icon        "..\\resources\\favicon.ico"
