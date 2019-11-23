@@ -76,6 +76,8 @@ SummaryReport *summary_report; // For summary report.
 Terminal *terminal;
 Trade *trade[FINAL_ENUM_TIMEFRAMES_INDEX];
 
+/* EA event handler functions */
+
 /**
  * Initialization function of the expert.
  */
@@ -134,21 +136,6 @@ void OnTick() {
     if (!terminal.IsOptimization()) {
       terminal.Logger().Flush(false);
     }
-  }
-}
-
-/**
- * Process a new bar.
- */
-void ProcessBar(Trade *_trade) {
-  if (_trade.TradeAllowed()) {
-    //last_ask = market.GetLastAsk();
-    //last_bid = market.GetLastBid();
-    //last_pip_change = market.GetLastPriceChangeInPips();
-    //if (hour_of_day != DateTime::Hour()) {
-    //  StartNewHour(_trade);
-    //}
-    //EA_Trade(_trade);
   }
 }
 
@@ -238,6 +225,70 @@ void OnChartEvent(
   const double& dparam, // Parameter of type double event.
   const string& sparam  // Parameter of type string events.
   ) {
+}
+
+/* Custom EA functions */
+
+/**
+ * Process a new bar.
+ */
+void ProcessBar(Trade *_trade) {
+  if (_trade.TradeAllowed()) {
+    EA_Trade(_trade);
+  }
+}
+
+/**
+ * Main function to trade.
+ */
+bool EA_Trade(Trade *_trade) {
+  Strategy *strat;
+  bool order_placed = false;
+  ENUM_ORDER_TYPE _cmd = EMPTY;
+  ENUM_TIMEFRAMES _tf = _trade.Chart().GetTf();
+
+  for (uint sid = 0; sid < strats.GetSize(); sid++) {
+    strat = ((Strategy *) strats.GetByIndex(sid));
+
+    if (strat.GetTf() == _tf && strat.IsEnabled() && !strat.IsSuspended()) {
+      if (strat.SignalOpen(ORDER_TYPE_BUY)) {
+        _cmd = ORDER_TYPE_BUY;
+      } else if (strat.SignalOpen(ORDER_TYPE_SELL)) {
+        _cmd = ORDER_TYPE_SELL;
+      } else {
+        _cmd = EMPTY;
+      }
+      if (_cmd != EMPTY) {
+        order_placed &= ExecuteOrder(_cmd, strat);
+      } // end: if
+    } // end: if
+  } // end: for
+
+  //if (order_placed) {
+    //ProcessOrders();
+  //}
+
+  return order_placed;
+}
+
+/**
+ * Execute trade order.
+ *
+ * @param
+ *   _cmd int
+ *     Trade order command to execute.
+ *   _strat Strategy
+ *     Strategy instance class.
+ * @return
+ *   Returns true on successful opening trade.
+ */
+int ExecuteOrder(ENUM_ORDER_TYPE _cmd, Strategy *_strat) {
+  bool _result = false;
+  //long _ticket_no;
+  double _trade_vol_max = market.GetVolumeMax();
+  Trade *_trade = _strat.Trade();
+  // @todo
+  return _result;
 }
 
 /**
