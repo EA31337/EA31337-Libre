@@ -19,18 +19,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//+------------------------------------------------------------------+
-//| EA includes.
-//+------------------------------------------------------------------+
-#include "include/EA31337-classes/Account.mqh"
-#include "include/EA31337-classes/Chart.mqh"
-#include "include/EA31337-classes/Collection.mqh"
-#include "include/EA31337-classes/Log.mqh"
-#include "include/EA31337-classes/Order.mqh"
-#include "include/EA31337-classes/Strategy.mqh"
-#include "include/EA31337-classes/Report.mqh"
-#include "include/EA31337-classes/SummaryReport.mqh"
-#include "include/EA31337-classes/Trade.mqh"
+// Includes.
+#include "include/includes.mqh"
 
 //+------------------------------------------------------------------+
 //| Inputs.

@@ -6,7 +6,7 @@
   "version"     :"1.000",
   "description" :"\nMulti-strategy advanced trading robot",
   "optimize"    :"0",
-  "fpzerocheck" :"1",
+  "fpzerocheck" :"0",
   "tester_no_cache":"0",
   "tester_everytick_calculate":"0",
 
@@ -224,6 +224,11 @@
     },
     {
       "path":".\\include\\EA31337-classes\\SummaryReport.mqh",
+      "compile":"false",
+      "relative_to_project":"true"
+    },
+    {
+      "path":".\\include\\includes.mqh",
       "compile":"false",
       "relative_to_project":"true"
     }
