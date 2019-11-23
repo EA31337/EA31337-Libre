@@ -141,7 +141,7 @@ void OnTick() {
  * Process a new bar.
  */
 void ProcessBar(Trade *_trade) {
-  //if (TradeAllowed()) {
+  if (_trade.TradeAllowed()) {
     //last_ask = market.GetLastAsk();
     //last_bid = market.GetLastBid();
     //last_pip_change = market.GetLastPriceChangeInPips();
@@ -149,7 +149,7 @@ void ProcessBar(Trade *_trade) {
     //  StartNewHour(_trade);
     //}
     //EA_Trade(_trade);
-  //}
+  }
 }
 
 #ifdef __MQL5__
