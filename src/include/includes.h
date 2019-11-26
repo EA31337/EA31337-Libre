@@ -29,3 +29,6 @@
 #include "EA31337-classes/Report.mqh"
 #include "EA31337-classes/SummaryReport.mqh"
 #include "EA31337-classes/Trade.mqh"
+
+// Strategy includes.
+#include "EA31337-strategies/strategies.h"
