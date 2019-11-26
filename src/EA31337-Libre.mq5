@@ -283,12 +283,7 @@ bool EA_Trade(Trade *_trade) {
  *   Returns true on successful opening trade.
  */
 int ExecuteOrder(ENUM_ORDER_TYPE _cmd, Strategy *_strat) {
-  bool _result = false;
-  //long _ticket_no;
-  double _trade_vol_max = market.GetVolumeMax();
-  Trade *_trade = _strat.Trade();
-  // @todo
-  return _result;
+  return _strat.OrderOpen(_cmd);
 }
 
 /**
