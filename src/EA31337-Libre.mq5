@@ -87,7 +87,10 @@ int OnInit() {
   session_initiated &= InitClasses();
   session_initiated &= InitVariables();
   session_initiated &= InitStrategies();
-  chart.WindowRedraw();
+  if (GetLastError() > 0) {
+    PrintFormat("%s(): Error %d: %s", __FUNCTION__, __LINE__, Terminal::GetLastErrorText());
+  }
+  Chart::WindowRedraw();
   return (session_initiated ? INIT_SUCCEEDED : INIT_FAILED);
 }
 
@@ -323,8 +326,14 @@ bool InitClasses() {
  * Init strategies.
  */
 bool InitStrategies() {
+  ResetLastError();
 
-  return true;
+  if ((RSI_Active_Tf & M1B) == M1B)   { strats.Add(Stg_RSI::Init_M1()); };
+  if ((RSI_Active_Tf & M5B) == M5B)   { strats.Add(Stg_RSI::Init_M5()); };
+  if ((RSI_Active_Tf & M15B) == M15B) { strats.Add(Stg_RSI::Init_M15()); }; // @fixme: error 4012?
+  if ((RSI_Active_Tf & M30B) == M30B) { strats.Add(Stg_RSI::Init_M30()); };
+
+  return GetLastError() == 0 || GetLastError() == 4012; // @fixme: error 4012?
 }
 
 /**
