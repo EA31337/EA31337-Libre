@@ -237,7 +237,13 @@ void OnChartEvent(
  */
 void ProcessBar(Trade *_trade) {
   if (_trade.TradeAllowed()) {
+    ResetLastError();
     EA_Trade(_trade);
+    // Print any errors.
+    if (GetLastError() > 0) {
+      PrintFormat("%s(): Error %d: %s", __FUNCTION__, __LINE__, Terminal::GetLastErrorText());
+    }
+    _trade.Logger().Flush();
   }
 }
 
