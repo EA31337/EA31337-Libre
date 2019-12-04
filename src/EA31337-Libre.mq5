@@ -252,47 +252,20 @@ void ProcessBar(Trade *_trade) {
  */
 bool EA_Trade(Trade *_trade) {
   Strategy *strat;
+  StgProcessResult sresult;
+  int sid;
   bool order_placed = false;
   ENUM_ORDER_TYPE _cmd = EMPTY;
   ENUM_TIMEFRAMES _tf = _trade.Chart().GetTf();
 
-  for (uint sid = 0; sid < strats.GetSize(); sid++) {
+  for (sid = 0; sid < strats.GetSize(); sid++) {
     strat = ((Strategy *) strats.GetByIndex(sid));
-
     if (strat.GetTf() == _tf && strat.IsEnabled() && !strat.IsSuspended()) {
-      if (strat.SignalOpen(ORDER_TYPE_BUY)) {
-        _cmd = ORDER_TYPE_BUY;
-      } else if (strat.SignalOpen(ORDER_TYPE_SELL)) {
-        _cmd = ORDER_TYPE_SELL;
-      } else {
-        _cmd = EMPTY;
-      }
-      if (_cmd != EMPTY) {
-        order_placed &= ExecuteOrder(_cmd, strat);
-      } // end: if
-    } // end: if
-  } // end: for
-
-  //if (order_placed) {
-    //ProcessOrders();
-  //}
+      sresult = strat.ProcessBar();
+    }
+  }
 
   return order_placed;
-}
-
-/**
- * Execute trade order.
- *
- * @param
- *   _cmd int
- *     Trade order command to execute.
- *   _strat Strategy
- *     Strategy instance class.
- * @return
- *   Returns true on successful opening trade.
- */
-int ExecuteOrder(ENUM_ORDER_TYPE _cmd, Strategy *_strat) {
-  return _strat.OrderOpen(_cmd);
 }
 
 /**
