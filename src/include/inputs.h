@@ -19,17 +19,20 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Class includes.
-#include "EA31337-classes/Account.mqh"
-#include "EA31337-classes/Chart.mqh"
-#include "EA31337-classes/Collection.mqh"
-#include "EA31337-classes/Log.mqh"
-#include "EA31337-classes/Order.mqh"
-#include "EA31337-classes/Strategy.mqh"
-#include "EA31337-classes/Report.mqh"
-#include "EA31337-classes/SummaryReport.mqh"
-#include "EA31337-classes/Trade.mqh"
+//+------------------------------------------------------------------+
+//| Inputs.
+//+------------------------------------------------------------------+
 
-// Strategy includes.
-INPUT string __Strategy_Parameters__ = "-- Strategy parameters --"; // >>> STRATEGIES <<<
-#include "EA31337-strategies/strategies.h"
+
+//input string __Trade_Parameters__ = "-- Trade parameters --"; // >>> TRADE <<<
+//input ulong TimeframeFilter = 0; // Timeframes filter (0 - auto)
+//input double MinPipChangeToTrade = 0.4; // Min pip change to trade (0 = every tick)
+
+input string __Logging_Parameters__ = "-- Settings for logging & messages --"; // >>> LOGS & MESSAGES <<<
+input ENUM_LOG_LEVEL VerboseLevel = V_INFO; // Level of log verbosity
+input bool WriteSummaryReport = true; // Write summary report on finish
+
+input string __Other_Parameters__ = "-- Other parameters --"; // >>> OTHER PARAMETERS <<<
+input uint MagicNumber = 31337; // Starting EA magic number
+
+input string __EA_Parameters__ = "-- End of input parameters for " + ea_name + " v" + ea_version + " --"; // >>> EA31337 <<<

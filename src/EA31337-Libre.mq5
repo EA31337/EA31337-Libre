@@ -19,20 +19,6 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Includes.
-#include "include/includes.h"
-
-//+------------------------------------------------------------------+
-//| Inputs.
-//+------------------------------------------------------------------+
-input ulong TimeframeFilter = 0; // Timeframes filter (0 - auto)
-input double MinPipChangeToTrade = 0.4; // Min pip change to trade (0 = every tick)
-input string __Logging_Parameters__ = "-- Settings for logging & messages --"; // >>> LOGS & MESSAGES <<<
-input ENUM_LOG_LEVEL VerboseLevel = V_INFO; // Level of log verbosity
-input bool WriteSummaryReport = true; // Write summary report on finish
-input string __Other_Parameters__ = "-- Other parameters --"; // >>> OTHER PARAMETERS <<<
-input uint MagicNumber = 31337; // Starting EA magic number
-
 //+------------------------------------------------------------------+
 //| EA defines.
 //+------------------------------------------------------------------+
@@ -45,6 +31,10 @@ input uint MagicNumber = 31337; // Starting EA magic number
 #define ea_file    __FILE__
 #define ea_date    __DATE__
 #define ea_build   __MQLBUILD__
+
+// Includes.
+#include "include/includes.h"
+#include "include/inputs.h"
 
 //+------------------------------------------------------------------+
 //| EA properties.
@@ -275,7 +265,7 @@ bool InitClasses() {
 
   // Initialize main classes.
   account = new Account();
-  logger = new Log(V_DEBUG);
+  logger = new Log(VerboseLevel);
   market = new Market(_Symbol, logger);
 
   // Initialize the current chart.
@@ -305,12 +295,13 @@ bool InitClasses() {
  * Init strategies.
  */
 bool InitStrategies() {
+  long _magic = MagicNumber;
   ResetLastError();
 
-  if ((RSI_Active_Tf & M1B) == M1B)   { strats.Add(Stg_RSI::Init_M1()); };
-  if ((RSI_Active_Tf & M5B) == M5B)   { strats.Add(Stg_RSI::Init_M5()); };
-  if ((RSI_Active_Tf & M15B) == M15B) { strats.Add(Stg_RSI::Init_M15()); }; // @fixme: error 4012?
-  if ((RSI_Active_Tf & M30B) == M30B) { strats.Add(Stg_RSI::Init_M30()); };
+  if ((RSI_Active_Tf & M1B) == M1B)   { strats.Add(Stg_RSI::Init_M1(_magic++)); };
+  if ((RSI_Active_Tf & M5B) == M5B)   { strats.Add(Stg_RSI::Init_M5(_magic++)); };
+  if ((RSI_Active_Tf & M15B) == M15B) { strats.Add(Stg_RSI::Init_M15(_magic++)); }; // @fixme: error 4012?
+  if ((RSI_Active_Tf & M30B) == M30B) { strats.Add(Stg_RSI::Init_M30(_magic++)); };
 
   return GetLastError() == 0 || GetLastError() == 4012; // @fixme: error 4012?
 }
