@@ -80,6 +80,7 @@ int OnInit() {
   if (GetLastError() > 0) {
     PrintFormat("%s(): Error %d: %s", __FUNCTION__, __LINE__, Terminal::GetLastErrorText());
   }
+  DisplayStartupInfo(true);
   Chart::WindowRedraw();
   return (session_initiated ? INIT_SUCCEEDED : INIT_FAILED);
 }
@@ -128,6 +129,9 @@ void OnTick() {
   if (_tick_procesed) {
     if (!terminal.IsOptimization()) {
       terminal.Logger().Flush(false);
+    }
+    if (PrintLogOnChart) {
+      DisplayInfo();
     }
   }
 }
@@ -256,6 +260,61 @@ bool EA_Trade(Trade *_trade) {
   }
 
   return order_placed;
+}
+
+/**
+ * Display trading info.
+ */
+bool DisplayInfo(string sep = "\n") {
+  ResetLastError();
+  if (terminal.IsOptimization() || (terminal.IsTesting() && !terminal.IsVisualMode())) {
+    // Ignore chart updates when optimizing or testing in non-visual mode.
+    return false;
+  }
+  string _output = StringFormat("%s v%s by %s (%s)%s", ea_name, ea_version, ea_author, ea_link, sep);
+  // ...
+  Comment(_output);
+  return Terminal::GetLastError() == ERR_NO_ERROR;
+}
+
+/**
+ * Display startup info.
+ */
+bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
+  ResetLastError();
+  if (terminal.IsOptimization() || (terminal.IsTesting() && !terminal.IsVisualMode())) {
+    // Ignore chart updates when optimizing or testing in non-visual mode.
+    return false;
+  }
+  string _output = StringFormat("%s v%s by %s (%s)%s", ea_name, ea_version, ea_author, ea_link, sep);
+  Trade *_trade = trade[Chart::TfToIndex(PERIOD_CURRENT)];
+  _output += "TERMINAL: " + terminal.ToString() + sep;
+  _output += "ACCOUNT: " + account.ToString() + sep;
+  _output += "SYMBOL: " + ((SymbolInfo *)market).ToString() + sep;
+  _output += "MARKET: " + market.ToString() + sep;
+  _output += "TRADE: " + _trade.ToString() + sep;
+  for (ENUM_TIMEFRAMES_INDEX _tfi = 0; _tfi < FINAL_ENUM_TIMEFRAMES_INDEX; _tfi++) {
+    if (Object::IsValid(trade[_tfi]) && trade[_tfi].Chart().IsValidTf()) {
+      _output += StringFormat("CHART: %s%s", trade[_tfi].Chart().ToString(), sep);
+    }
+  }
+  if (_startup) {
+    if (session_initiated && Terminal::IsTradeAllowed()) {
+      if (_trade.TradeAllowed()) {
+        _output += sep + "Trading is allowed, waiting for new bars...";
+      } else {
+        _output += sep + "Trading is allowed, but there is some issue...";
+        _output += sep + _trade.Logger().GetLastMsg(V_ERROR);
+      }
+    } else if (terminal.IsRealtime()) {
+      _output += sep + StringFormat("Error %d: Trading is not allowed for this symbol, please enable automated trading or check the settings!", __LINE__);
+    }
+    else {
+      _output += sep + "Waiting for new bars...";
+    }
+  }
+  Comment(_output);
+  return Terminal::GetLastError() == ERR_NO_ERROR;
 }
 
 /**

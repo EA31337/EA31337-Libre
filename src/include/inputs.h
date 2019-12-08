@@ -29,6 +29,7 @@
 //input double MinPipChangeToTrade = 0.4; // Min pip change to trade (0 = every tick)
 
 input string __Logging_Parameters__ = "-- Settings for logging & messages --"; // >>> LOGS & MESSAGES <<<
+input bool PrintLogOnChart = true; // Display info on chart
 input ENUM_LOG_LEVEL VerboseLevel = V_INFO; // Level of log verbosity
 input bool WriteSummaryReport = true; // Write summary report on finish
 
