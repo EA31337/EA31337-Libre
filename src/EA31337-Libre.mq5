@@ -293,10 +293,19 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
   _output += "SYMBOL: " + ((SymbolInfo *)market).ToString() + sep;
   _output += "MARKET: " + market.ToString() + sep;
   _output += "TRADE: " + _trade.ToString() + sep;
+  // Print details for each active chart.
   for (ENUM_TIMEFRAMES_INDEX _tfi = 0; _tfi < FINAL_ENUM_TIMEFRAMES_INDEX; _tfi++) {
     if (Object::IsValid(trade[_tfi]) && trade[_tfi].Chart().IsValidTf()) {
       _output += StringFormat("CHART: %s%s", trade[_tfi].Chart().ToString(), sep);
     }
+  }
+  // Print strategies info.
+  int sid;
+  Strategy *_strat;
+  _output += "STRATEGIES:" + sep;
+  for (sid = 0; sid < strats.GetSize(); sid++) {
+    _strat = ((Strategy *) strats.GetByIndex(sid));
+    _output += _strat.ToString();
   }
   if (_startup) {
     if (session_initiated && Terminal::IsTradeAllowed()) {
