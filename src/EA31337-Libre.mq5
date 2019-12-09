@@ -256,6 +256,9 @@ bool EA_Trade(Trade *_trade) {
     strat = ((Strategy *) strats.GetByIndex(sid));
     if (strat.GetTf() == _tf && strat.IsEnabled() && !strat.IsSuspended()) {
       sresult = strat.ProcessBar();
+      if (!terminal.IsOptimization()) {
+        strat.Logger().Flush();
+      }
     }
   }
 
