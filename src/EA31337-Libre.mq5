@@ -369,10 +369,12 @@ bool InitStrategies() {
   long _magic = MagicNumber;
   ResetLastError();
 
-  if ((RSI_Active_Tf & M1B) == M1B)   { strats.Add(Stg_RSI::Init_M1(_magic++)); };
-  if ((RSI_Active_Tf & M5B) == M5B)   { strats.Add(Stg_RSI::Init_M5(_magic++)); };
-  if ((RSI_Active_Tf & M15B) == M15B) { strats.Add(Stg_RSI::Init_M15(_magic++)); }; // @fixme: error 4012?
-  if ((RSI_Active_Tf & M30B) == M30B) { strats.Add(Stg_RSI::Init_M30(_magic++)); };
+  if ((RSI_Active_Tf & M1B)  == M1B)  { strats.Add(Stg_RSI::Init(PERIOD_M1,  _magic++)); };
+  if ((RSI_Active_Tf & M5B)  == M5B)  { strats.Add(Stg_RSI::Init(PERIOD_M5,  _magic++)); };
+  if ((RSI_Active_Tf & M15B) == M15B) { strats.Add(Stg_RSI::Init(PERIOD_M15, _magic++)); }; // @fixme: error 4012?
+  if ((RSI_Active_Tf & M30B) == M30B) { strats.Add(Stg_RSI::Init(PERIOD_M30, _magic++)); };
+  if ((RSI_Active_Tf & H1B)  == H1B)  { strats.Add(Stg_RSI::Init(PERIOD_H1,  _magic++)); };
+  if ((RSI_Active_Tf & H4B)  == H4B)  { strats.Add(Stg_RSI::Init(PERIOD_H4,  _magic++)); };
 
   return GetLastError() == 0 || GetLastError() == 4012; // @fixme: error 4012?
 }
