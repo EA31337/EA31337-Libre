@@ -25,11 +25,11 @@
 #include "EA31337-classes/Collection.mqh"
 #include "EA31337-classes/Log.mqh"
 #include "EA31337-classes/Order.mqh"
-#include "EA31337-classes/Strategy.mqh"
 #include "EA31337-classes/Report.mqh"
+#include "EA31337-classes/Strategy.mqh"
 #include "EA31337-classes/SummaryReport.mqh"
 #include "EA31337-classes/Trade.mqh"
 
 // Strategy includes.
-INPUT string __Strategy_Parameters__ = "-- Strategy parameters --"; // >>> STRATEGIES <<<
+INPUT string __Strategy_Parameters__ = "-- Strategy parameters --";  // >>> STRATEGIES <<<
 #include "EA31337-strategies/strategies.h"
