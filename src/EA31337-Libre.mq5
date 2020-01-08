@@ -369,6 +369,20 @@ bool InitStrategies() {
   long _magic = MagicNumber;
   ResetLastError();
 
+  if ((Alligator_Active_Tf & M1B)  == M1B)  { strats.Add(Stg_Alligator::Init(PERIOD_M1,  _magic++)); };
+  if ((Alligator_Active_Tf & M5B)  == M5B)  { strats.Add(Stg_Alligator::Init(PERIOD_M5,  _magic++)); };
+  if ((Alligator_Active_Tf & M15B) == M15B) { strats.Add(Stg_Alligator::Init(PERIOD_M15, _magic++)); };
+  if ((Alligator_Active_Tf & M30B) == M30B) { strats.Add(Stg_Alligator::Init(PERIOD_M30, _magic++)); };
+  if ((Alligator_Active_Tf & H1B)  == H1B)  { strats.Add(Stg_Alligator::Init(PERIOD_H1,  _magic++)); };
+  if ((Alligator_Active_Tf & H4B)  == H4B)  { strats.Add(Stg_Alligator::Init(PERIOD_H4,  _magic++)); };
+
+  if ((Bands_Active_Tf & M1B)  == M1B)  { strats.Add(Stg_Bands::Init(PERIOD_M1,  _magic++)); };
+  if ((Bands_Active_Tf & M5B)  == M5B)  { strats.Add(Stg_Bands::Init(PERIOD_M5,  _magic++)); };
+  if ((Bands_Active_Tf & M15B) == M15B) { strats.Add(Stg_Bands::Init(PERIOD_M15, _magic++)); };
+  if ((Bands_Active_Tf & M30B) == M30B) { strats.Add(Stg_Bands::Init(PERIOD_M30, _magic++)); };
+  if ((Bands_Active_Tf & H1B)  == H1B)  { strats.Add(Stg_Bands::Init(PERIOD_H1,  _magic++)); };
+  if ((Bands_Active_Tf & H4B)  == H4B)  { strats.Add(Stg_Bands::Init(PERIOD_H4,  _magic++)); };
+
   if ((RSI_Active_Tf & M1B)  == M1B)  { strats.Add(Stg_RSI::Init(PERIOD_M1,  _magic++)); };
   if ((RSI_Active_Tf & M5B)  == M5B)  { strats.Add(Stg_RSI::Init(PERIOD_M5,  _magic++)); };
   if ((RSI_Active_Tf & M15B) == M15B) { strats.Add(Stg_RSI::Init(PERIOD_M15, _magic++)); }; // @fixme: error 4012?
