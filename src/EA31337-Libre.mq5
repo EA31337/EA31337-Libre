@@ -242,7 +242,7 @@ bool EA_Trade(Trade *_trade) {
   for (sid = 0; sid < strats.GetSize(); sid++) {
     strat = ((Strategy *)strats.GetByIndex(sid));
     if (strat.GetTf() == _tf && strat.IsEnabled() && !strat.IsSuspended()) {
-      sresult = strat.ProcessBar();
+      sresult = strat.ProcessSignals();
       if (!terminal.IsOptimization()) {
         strat.Logger().Flush();
       }
@@ -402,8 +402,9 @@ bool InitStrategies() {
     strats.Add(Stg_RSI::Init(PERIOD_M5, _magic++));
   };
   if ((RSI_Active_Tf & M15B) == M15B) {
+    // @fixme: error 4012?
     strats.Add(Stg_RSI::Init(PERIOD_M15, _magic++));
-  };  // @fixme: error 4012?
+  };
   if ((RSI_Active_Tf & M30B) == M30B) {
     strats.Add(Stg_RSI::Init(PERIOD_M30, _magic++));
   };

@@ -18,8 +18,6 @@
 [attr]binary  -text diff
 
 # Define text file attributes.
-*.exe     binary
-*.mq4     MQLtext diff=c
-*.mq5     MQLtext diff=c
-*.mqh     MQLtext diff=c
+*.ex?     binary
+*.mq?     MQLtext diff=c
 *.mqproj  utf16 diff=c
