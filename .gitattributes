@@ -19,5 +19,6 @@
 
 # Define text file attributes.
 *.ex?     binary
+*.h       MQLtext diff=c
 *.mq?     MQLtext diff=c
 *.mqproj  utf16 diff=c

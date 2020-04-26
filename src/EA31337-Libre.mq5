@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                 EA31337 - multi-strategy advanced trading robot. |
-//|                       Copyright 2016-2019, 31337 Investments Ltd |
+//|                       Copyright 2016-2020, 31337 Investments Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
 
@@ -19,15 +19,13 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//+------------------------------------------------------------------+
-//| EA defines.
-//+------------------------------------------------------------------+
+// EA defines.
 #define ea_name "EA31337 Libre"
 #define ea_version "1.000"
 #define ea_desc "Multi-strategy advanced trading robot"
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"
-#define ea_copy "Copyright 2016-2019, 31337 Investments Ltd"
+#define ea_copy "Copyright 2016-2020, 31337 Investments Ltd"
 #define ea_file __FILE__
 #define ea_date __DATE__
 #define ea_build __MQLBUILD__
@@ -36,9 +34,7 @@
 #include "include/includes.h"
 #include "include/inputs.h"
 
-//+------------------------------------------------------------------+
-//| EA properties.
-//+------------------------------------------------------------------+
+// EA properties.
 #property strict
 #property version ea_version
 #ifdef __MQL4__
@@ -49,22 +45,8 @@
 #property copyright ea_copy
 //#property icon        "..\\resources\\favicon.ico"
 
-//+------------------------------------------------------------------+
-//| EA variables.
-//+------------------------------------------------------------------+
-bool session_initiated = false;
-datetime init_bar_time;
-uint init_spread;
-
-// Class variables.
-Account *account;
-Chart *chart;
-Collection *strats;
-Log *logger;
-Market *market;
-SummaryReport *summary_report;  // For summary report.
-Terminal *terminal;
-Trade *trade[FINAL_ENUM_TIMEFRAMES_INDEX];
+// Global variables.
+EA *ea;
 
 /* EA event handler functions */
 
@@ -72,23 +54,27 @@ Trade *trade[FINAL_ENUM_TIMEFRAMES_INDEX];
  * Initialization function of the expert.
  */
 int OnInit() {
+  bool _initiated = true;
   PrintFormat("%s v%s (%s) initializing...", ea_name, ea_version, ea_link);
-  session_initiated = true;
-  session_initiated &= InitClasses();
-  session_initiated &= InitVariables();
-  session_initiated &= InitStrategies();
+  _initiated &= InitEA();
+  _initiated &= InitStrategies();
   if (GetLastError() > 0) {
-    PrintFormat("%s(): Error %d: %s", __FUNCTION__, __LINE__, Terminal::GetLastErrorText());
+    ea.Log().Error("Error during initializing!", __FUNCTION_LINE__, Terminal::GetLastErrorText());
   }
   DisplayStartupInfo(true);
+  ea.Log().Flush();
   Chart::WindowRedraw();
-  return (session_initiated ? INIT_SUCCEEDED : INIT_FAILED);
+  if (!_initiated) {
+    ea.GetState().Enable(false);
+  }
+  return (_initiated ? INIT_SUCCEEDED : INIT_FAILED);
 }
 
 /**
  * Deinitialization function of the expert.
  */
 void OnDeinit(const int reason) {
+  /*
   if (session_initiated) {
     string filename;
     if (WriteSummaryReport && !Terminal::IsOptimization()) {
@@ -103,6 +89,7 @@ void OnDeinit(const int reason) {
       Print(__FUNCTION__ + ": Saved report as: " + filename);
     }
   }
+  */
   DeinitVars();
 }
 
@@ -112,25 +99,20 @@ void OnDeinit(const int reason) {
  * Invoked when a new tick for a symbol is received, to the chart of which the Expert Advisor is attached.
  */
 void OnTick() {
-  if (!session_initiated) return;
+  //if (!session_initiated) return;
 
-  MqlTick _tick = market.GetTick();
-  bool _tick_procesed = false;
-  for (ENUM_TIMEFRAMES_INDEX tfi = 0; tfi < FINAL_ENUM_TIMEFRAMES_INDEX; tfi++) {
-    if (Object::IsDynamic(trade[tfi]) && trade[tfi].Chart().IsValidTf()) {
-      if (trade[tfi].Chart().IsNewBar()) {
-        trade[tfi].Market().SetTick(_tick);
-        ProcessBar(trade[tfi]);
-        _tick_procesed = true;
-      }
+  MqlTick _tick = SymbolInfo::GetTick(_Symbol);
+  bool _processed = false;
+  if (ea.Chart().IsNewBar()) {
+    ea.Process();
+    if (!ea.GetState().IsOptimizationMode()) {
+      ea.Log().Flush();
     }
+    _processed = true;
   }
-  if (_tick_procesed) {
-    if (!terminal.IsOptimization()) {
-      terminal.Logger().Flush(false);
-    }
+  if (_processed) {
     if (PrintLogOnChart) {
-      DisplayInfo();
+      //DisplayInfo();
     }
   }
 }
@@ -214,82 +196,22 @@ void OnChartEvent(const int id,          // Event ID.
 /* Custom EA functions */
 
 /**
- * Process a new bar.
- */
-void ProcessBar(Trade *_trade) {
-  if (_trade.TradeAllowed()) {
-    ResetLastError();
-    EA_Trade(_trade);
-    // Print any errors.
-    if (GetLastError() > 0) {
-      PrintFormat("%s(): Error %d: %s", __FUNCTION__, __LINE__, Terminal::GetLastErrorText());
-    }
-    _trade.Logger().Flush();
-  }
-}
-
-/**
- * Main function to trade.
- */
-bool EA_Trade(Trade *_trade) {
-  Strategy *strat;
-  StgProcessResult sresult;
-  int sid;
-  bool order_placed = false;
-  ENUM_ORDER_TYPE _cmd = EMPTY;
-  ENUM_TIMEFRAMES _tf = _trade.Chart().GetTf();
-
-  for (sid = 0; sid < strats.GetSize(); sid++) {
-    strat = ((Strategy *)strats.GetByIndex(sid));
-    if (strat.GetTf() == _tf && strat.IsEnabled() && !strat.IsSuspended()) {
-      sresult = strat.ProcessSignals();
-      if (!terminal.IsOptimization()) {
-        strat.Logger().Flush();
-      }
-    }
-  }
-
-  return order_placed;
-}
-
-/**
- * Display trading info.
- */
-bool DisplayInfo(string sep = "\n") {
-  ResetLastError();
-  if (terminal.IsOptimization() || (terminal.IsTesting() && !terminal.IsVisualMode())) {
-    // Ignore chart updates when optimizing or testing in non-visual mode.
-    return false;
-  }
-  string _output = StringFormat("%s v%s by %s (%s)%s", ea_name, ea_version, ea_author, ea_link, sep);
-  // ...
-  Comment(_output);
-  return Terminal::GetLastError() == ERR_NO_ERROR;
-}
-
-/**
  * Display startup info.
  */
 bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
+  string _output = "";
   ResetLastError();
-  if (terminal.IsOptimization() || (terminal.IsTesting() && !terminal.IsVisualMode())) {
+  if (ea.GetState().IsOptimizationMode() || (ea.GetState().IsTestingMode() && !ea.GetState().IsTestingVisualMode())) {
     // Ignore chart updates when optimizing or testing in non-visual mode.
     return false;
   }
-  string _output = StringFormat("%s v%s by %s (%s)%s", ea_name, ea_version, ea_author, ea_link, sep);
-  Trade *_trade = trade[Chart::TfToIndex(PERIOD_CURRENT)];
-  _output += "TERMINAL: " + terminal.ToString() + sep;
-  _output += "ACCOUNT: " + account.ToString() + sep;
-  _output += "SYMBOL: " + ((SymbolInfo *)market).ToString() + sep;
-  _output += "MARKET: " + market.ToString() + sep;
-  _output += "TRADE: " + _trade.ToString() + sep;
-  // Print details for each active chart.
-  for (ENUM_TIMEFRAMES_INDEX _tfi = 0; _tfi < FINAL_ENUM_TIMEFRAMES_INDEX; _tfi++) {
-    if (Object::IsValid(trade[_tfi]) && trade[_tfi].Chart().IsValidTf()) {
-      _output += StringFormat("CHART: %s%s", trade[_tfi].Chart().ToString(), sep);
-    }
-  }
+  _output += "TERMINAL: " + ea.Terminal().ToString() + sep;
+  _output += "ACCOUNT: " + ea.Account().ToString() + sep;
+  _output += "EA: " + ea.ToString() + sep;
+  _output += "SYMBOL: " + ea.SymbolInfo().ToString() + sep;
+  _output += "MARKET: " + ea.Market().ToString() + sep;
   // Print strategies info.
+  /*
   int sid;
   Strategy *_strat;
   _output += "STRATEGIES:" + sep;
@@ -297,15 +219,17 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
     _strat = ((Strategy *)strats.GetByIndex(sid));
     _output += _strat.ToString();
   }
+  */
   if (_startup) {
-    if (session_initiated && Terminal::IsTradeAllowed()) {
-      if (_trade.TradeAllowed()) {
+    if (ea.GetState().IsTradeAllowed()) {
+      if (!Terminal::HasError()) {
         _output += sep + "Trading is allowed, waiting for new bars...";
       } else {
         _output += sep + "Trading is allowed, but there is some issue...";
-        _output += sep + _trade.Logger().GetLastMsg(V_ERROR);
+        _output += sep + Terminal::GetLastErrorText();
+        ea.Log().AddLastError(__FUNCTION_LINE__);
       }
-    } else if (terminal.IsRealtime()) {
+    } else if (Terminal::IsRealtime()) {
       _output += sep + StringFormat(
                            "Error %d: Trading is not allowed for this symbol, please enable automated trading or check "
                            "the settings!",
@@ -315,130 +239,74 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
     }
   }
   Comment(_output);
-  return Terminal::GetLastError() == ERR_NO_ERROR;
+  return !Terminal::HasError();
 }
 
 /**
- * Init classes.
+ * Init EA.
  */
-bool InitClasses() {
-  // Initialize main classes.
-  account = new Account();
-  logger = new Log(VerboseLevel);
-  market = new Market(_Symbol, logger);
-
-  // Initialize the current chart.
-  ENUM_TIMEFRAMES_INDEX _tfi = Chart::TfToIndex(PERIOD_CURRENT);
-  TradeParams trade_params(account, new Chart(_tfi), logger);
-  trade[_tfi] = new Trade(trade_params);
-
-  // Verify that the current chart has been initialized correctly.
-  if (Object::IsDynamic(trade[_tfi]) && trade[_tfi].Chart().IsValidTf()) {
-    // Assign to the current chart.
-    chart = trade[_tfi].Chart();
-  } else {
-    PrintFormat("%s(): Error: Cannot initialize the current timeframe (%s)!", __FUNCTION_LINE__,
-                Chart::IndexToString(_tfi));
-    return false;
+bool InitEA() {
+  bool _initiated = true;
+  EAParams ea_params(__FILE__, VerboseLevel);
+  ea_params.SetChartInfoFreq(PrintLogOnChart ? 2 : 0);
+  ea_params.SetName(ea_name);
+  ea_params.SetAuthor(StringFormat("%s (%s)", ea_author, ea_link));
+  ea_params.SetDesc(ea_desc);
+  ea_params.SetVersion(ea_version);
+  ea = new EA(ea_params);
+  if (ea.GetState().IsTradeAllowed()) {
+    ea.Log().Error("Trading is not allowed for this symbol, please enable automated trading or check the settings!", __FUNCTION_LINE__);
+    _initiated = false;
   }
-
-  // Initialize other classes.
-  terminal = market.TerminalHandler();
-  strats = new Collection();
-  summary_report = new SummaryReport();
-
-  return true;
+  return _initiated;
 }
 
 /**
  * Init strategies.
  */
 bool InitStrategies() {
+  bool _result = true;
   long _magic = MagicNumber;
   ResetLastError();
-
-  if ((Alligator_Active_Tf & M1B) == M1B) {
-    strats.Add(Stg_Alligator::Init(PERIOD_M1, _magic++));
-  };
-  if ((Alligator_Active_Tf & M5B) == M5B) {
-    strats.Add(Stg_Alligator::Init(PERIOD_M5, _magic++));
-  };
-  if ((Alligator_Active_Tf & M15B) == M15B) {
-    strats.Add(Stg_Alligator::Init(PERIOD_M15, _magic++));
-  };
-  if ((Alligator_Active_Tf & M30B) == M30B) {
-    strats.Add(Stg_Alligator::Init(PERIOD_M30, _magic++));
-  };
-  if ((Alligator_Active_Tf & H1B) == H1B) {
-    strats.Add(Stg_Alligator::Init(PERIOD_H1, _magic++));
-  };
-  if ((Alligator_Active_Tf & H4B) == H4B) {
-    strats.Add(Stg_Alligator::Init(PERIOD_H4, _magic++));
-  };
-
-  if ((Bands_Active_Tf & M1B) == M1B) {
-    strats.Add(Stg_Bands::Init(PERIOD_M1, _magic++));
-  };
-  if ((Bands_Active_Tf & M5B) == M5B) {
-    strats.Add(Stg_Bands::Init(PERIOD_M5, _magic++));
-  };
-  if ((Bands_Active_Tf & M15B) == M15B) {
-    strats.Add(Stg_Bands::Init(PERIOD_M15, _magic++));
-  };
-  if ((Bands_Active_Tf & M30B) == M30B) {
-    strats.Add(Stg_Bands::Init(PERIOD_M30, _magic++));
-  };
-  if ((Bands_Active_Tf & H1B) == H1B) {
-    strats.Add(Stg_Bands::Init(PERIOD_H1, _magic++));
-  };
-  if ((Bands_Active_Tf & H4B) == H4B) {
-    strats.Add(Stg_Bands::Init(PERIOD_H4, _magic++));
-  };
-
-  if ((RSI_Active_Tf & M1B) == M1B) {
-    strats.Add(Stg_RSI::Init(PERIOD_M1, _magic++));
-  };
-  if ((RSI_Active_Tf & M5B) == M5B) {
-    strats.Add(Stg_RSI::Init(PERIOD_M5, _magic++));
-  };
-  if ((RSI_Active_Tf & M15B) == M15B) {
-    // @fixme: error 4012?
-    strats.Add(Stg_RSI::Init(PERIOD_M15, _magic++));
-  };
-  if ((RSI_Active_Tf & M30B) == M30B) {
-    strats.Add(Stg_RSI::Init(PERIOD_M30, _magic++));
-  };
-  if ((RSI_Active_Tf & H1B) == H1B) {
-    strats.Add(Stg_RSI::Init(PERIOD_H1, _magic++));
-  };
-  if ((RSI_Active_Tf & H4B) == H4B) {
-    strats.Add(Stg_RSI::Init(PERIOD_H4, _magic++));
-  };
-
-  return GetLastError() == 0 || GetLastError() == 4012;  // @fixme: error 4012?
-}
-
-/**
- * Initialize startup variables.
- */
-bool InitVariables() {
-  bool _initiated = true;
-  init_bar_time = chart.iTime(_Symbol, 0, 0);
-  init_spread = market.GetSpreadInPts();
-  return _initiated;
+  _result &= ea.StrategyAdd<Stg_AC>(AC_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_AD>(AD_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_ADX>(ADX_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_ATR>(ATR_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Alligator>(Alligator_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Awesome>(Awesome_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_BWMFI>(BWMFI_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Bands>(Bands_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_BearsPower>(BearsPower_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_BullsPower>(BullsPower_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_CCI>(CCI_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_DeMarker>(DeMarker_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Envelopes>(Envelopes_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Force>(Force_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Fractals>(Fractals_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Gator>(Gator_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Ichimoku>(Ichimoku_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_MA>(MA_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_MACD>(MACD_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_MFI>(MFI_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Momentum>(Momentum_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_OBV>(OBV_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_OsMA>(OsMA_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_RSI>(RSI_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_RSI>(RSI_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_RVI>(RVI_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_SAR>(SAR_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_StdDev>(StdDev_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_Stochastic>(Stochastic_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_WPR>(WPR_Active_Tf);
+  _result &= ea.StrategyAdd<Stg_ZigZag>(ZigZag_Active_Tf);
+  _result &= GetLastError() == 0 || GetLastError() == 5053; // @fixme: error 5053?
+  ResetLastError();
+  return _result;
 }
 
 /**
  * Deinitialize global class variables.
  */
 void DeinitVars() {
-  Object::Delete(account);
-  Object::Delete(logger);
-  Object::Delete(summary_report);
-  Object::Delete(terminal);
-  Object::Delete(market);
-  Object::Delete(strats);
-  for (int tfi = 0; tfi < FINAL_ENUM_TIMEFRAMES_INDEX; tfi++) {
-    Object::Delete(trade[tfi]);
-  }
+  Object::Delete(ea);
 }
