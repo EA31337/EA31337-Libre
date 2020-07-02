@@ -13,18 +13,25 @@ on:
 
 jobs:
   Compile:
+    defaults:
+      run:
+        shell: bash
+        working-directory: src
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
+      - uses: actions/checkout@v2
+        with:
+          repository: EA31337/EA31337-classes
       - name: Compile for MQL4
         uses: fx31337/mql-compile-action@master
         with:
-          path: src/EA31337-Libre.mq4
+          path: EA31337-Libre.mq4
           verbose: true
       - name: Compile for MQL5
         uses: fx31337/mql-compile-action@master
         with:
-          path: src/EA31337-Libre.mq4
+          path: EA31337-Libre.mq4
           verbose: true
