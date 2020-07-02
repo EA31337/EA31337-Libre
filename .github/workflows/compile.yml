@@ -1,0 +1,30 @@
+---
+name: Compile
+
+on:
+  pull_request:
+    paths:
+      - '**.mq?'
+      - '.github/workflows/compile.yml'
+  push:
+    paths:
+      - '**.mq?'
+      - '.github/workflows/compile.yml'
+
+jobs:
+  Compile:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Compile for MQL4
+        uses: fx31337/mql-compile-action@master
+        with:
+          path: src/EA31337-Libre.mq4
+          verbose: true
+      - name: Compile for MQL5
+        uses: fx31337/mql-compile-action@master
+        with:
+          path: src/EA31337-Libre.mq4
+          verbose: true
