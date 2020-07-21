@@ -6,10 +6,12 @@ on:
     paths:
       - '**.mq?'
       - '.github/workflows/compile.yml'
+      - 'src/include/**'
   push:
     paths:
       - '**.mq?'
       - '.github/workflows/compile.yml'
+      - 'src/include/**'
 
 jobs:
   Compile:
