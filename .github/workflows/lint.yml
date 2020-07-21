@@ -1,0 +1,53 @@
+---
+name: Lint
+
+# yamllint disable-line rule:truthy
+on:
+  pull_request:
+    paths:
+      - '**/*.mq?'
+      - '**/*.sh'
+      - '*.y?ml'
+  push:
+    paths:
+      - '**/*.mq?'
+      - '**/*.sh'
+      - '**/*.y?ml'
+
+jobs:
+  YAML:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: YAML check (yamllint)
+        uses: ibiqlik/action-yamllint@master
+        with:
+          strict: true
+  Markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: markdownlint-cli
+        uses: nosborn/github-action-markdown-cli@v1.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: .
+  ShellCheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Shell Check
+        uses: luizm/action-sh-checker@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          sh_checker_comment: true
+          sh_checker_shfmt_disable: true
+  MQL:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: DoozyX/clang-format-lint-action@v0.5
+        with:
+          extensions: 'h'
