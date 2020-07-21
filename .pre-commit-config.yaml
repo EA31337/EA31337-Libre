@@ -25,13 +25,9 @@ repos:
     hooks:
       - id: forbid-binary
         exclude: (\.ico|\.mqproj)$
-      # - id: git-check     # Configure in .gitattributes
-      #   exclude: \.txt$
+      - id: git-check     # Configure in .gitattributes
       - id: markdownlint  # Configure in .mdlrc
       # - id: require-ascii
-      - id: script-must-have-extension
-      # - id: shellcheck
-      - id: shfmt
 
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.23.0
