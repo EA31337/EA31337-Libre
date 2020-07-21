@@ -22,16 +22,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - uses: actions/checkout@v2
-        with:
-          repository: EA31337/EA31337-classes
+      - name: List MQL files
+        run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
+        shell: powershell
       - name: Compile for MQL4
         uses: fx31337/mql-compile-action@master
         with:
-          path: EA31337-Libre.mq4
+          path: src\EA31337-Libre.mq4
+          include: src
           verbose: true
       - name: Compile for MQL5
         uses: fx31337/mql-compile-action@master
         with:
-          path: EA31337-Libre.mq4
+          path: src\EA31337-Libre.mq5
+          include: src
           verbose: true
