@@ -1,0 +1,19 @@
+---
+name: Check
+
+# yamllint disable-line rule:truthy
+on:
+  pull_request:
+  push:
+
+jobs:
+  Pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit|${{ hashFiles('.pre-commit-config.yaml') }}
+      - uses: actions/setup-python@v1
+      - uses: pre-commit/action@v2.0.0
