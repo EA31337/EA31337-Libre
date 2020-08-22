@@ -2,7 +2,6 @@
 
 <!--[![Release][github-release-image]][github-release-link]-->
 [![License][license-image]][license-link]
-[![Status][appveyor-ci-build-link]][appveyor-ci-build-image]
 [![Status][gha-image-check-master]][gha-link-check-master]
 [![Status][gha-image-compile-master]][gha-link-compile-master]
 [![Status][gha-image-lint-master]][gha-link-lint-master]
@@ -143,9 +142,6 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 [tg-channel-link]: https://t.me/EA31337_News
 [tg-chat-image]: https://img.shields.io/badge/Telegram-chat-0088CC.svg?logo=telegram
 [tg-chat-link]: https://t.me/EA31337
-
-[appveyor-ci-build-link]: https://ci.appveyor.com/api/projects/status/xy6iuhtnfst97twd/branch/master?svg=true
-[appveyor-ci-build-image]: https://ci.appveyor.com/project/kenorb/ea31337-libre
 
 [gha-link-check-master]: https://github.com/EA31337/EA31337-Libre/actions?query=workflow%3ACheck+branch%3Amaster
 [gha-image-check-master]: https://github.com/EA31337/EA31337-Libre/workflows/Check/badge.svg?branch=master
