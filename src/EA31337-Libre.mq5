@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//|                 EA31337 - multi-strategy advanced trading robot. |
+//|            EA31337 Libre - multi-strategy advanced trading robot |
 //|                       Copyright 2016-2020, 31337 Investments Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
@@ -25,7 +25,7 @@
 #define ea_desc "Multi-strategy advanced trading robot"
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"
-#define ea_copy "Copyright 2016-2020, 31337 Investments Ltd"
+#define ea_copy "Copyright 2016-2020, kenorb"
 #define ea_file __FILE__
 #define ea_date __DATE__
 #define ea_build __MQLBUILD__
@@ -100,17 +100,8 @@ void OnDeinit(const int reason) {
  */
 void OnTick() {
   //if (!session_initiated) return;
-
-  MqlTick _tick = SymbolInfo::GetTick(_Symbol);
-  bool _processed = false;
-  if (ea.Chart().IsNewBar()) {
-    ea.Process();
-    if (!ea.GetState().IsOptimizationMode()) {
-      ea.Log().Flush();
-    }
-    _processed = true;
-  }
-  if (_processed) {
+  EAProcessResult _result = ea.ProcessTick();
+  if (_result.stg_processed) {
     if (PrintLogOnChart) {
       //DisplayInfo();
     }
