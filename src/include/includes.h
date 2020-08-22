@@ -22,7 +22,7 @@
 // Class includes.
 #include "EA31337-classes/Account.mqh"
 #include "EA31337-classes/Chart.mqh"
-#include "EA31337-classes/Collection.mqh"
+#include "EA31337-classes/EA.mqh"
 #include "EA31337-classes/Log.mqh"
 #include "EA31337-classes/Order.mqh"
 #include "EA31337-classes/Report.mqh"
