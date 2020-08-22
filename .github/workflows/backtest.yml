@@ -1,5 +1,5 @@
 ---
-name: Compile
+name: Backtest
 
 # yamllint disable-line rule:truthy
 on:
@@ -45,3 +45,25 @@ jobs:
           verbose: true
       - name: List compiled files
         run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ea31337-libre
+          path: 'src/*.ex?'
+  Test:
+    needs: Compile
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        month: [1]
+        year: [2018, 2019]
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: ea31337-libre
+      - name: Run backtest
+        uses: ea31337/mql-tester-action@master
+        with:
+          TestExpert: "EA31337-Libre"
+          BtMonths: ${{ matrix.month }}
+          BtYears: ${{ matrix.year }}
