@@ -1,9 +1,8 @@
 //+------------------------------------------------------------------+
 //|            EA31337 Libre - multi-strategy advanced trading robot |
-//|                       Copyright 2016-2020, 31337 Investments Ltd |
+//|                       Copyright 2016-2021, 31337 Investments Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
-
 /*
  *  This file is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -25,7 +24,7 @@
 #define ea_desc "Multi-strategy advanced trading robot"
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"
-#define ea_copy "Copyright 2016-2020, kenorb"
+#define ea_copy "Copyright 2016-2021, kenorb"
 #define ea_file __FILE__
 #define ea_date __DATE__
 #define ea_build __MQLBUILD__
@@ -271,6 +270,7 @@ bool InitStrategies() {
   _result &= ea.StrategyAdd<Stg_BullsPower>(BullsPower_Active_Tf);
   _result &= ea.StrategyAdd<Stg_CCI>(CCI_Active_Tf);
   _result &= ea.StrategyAdd<Stg_DeMarker>(DeMarker_Active_Tf);
+  // _result &= ea.StrategyAdd<Stg_ElliottWave>(ElliottWave_Active_Tf);
   _result &= ea.StrategyAdd<Stg_Envelopes>(Envelopes_Active_Tf);
   _result &= ea.StrategyAdd<Stg_Force>(Force_Active_Tf);
   _result &= ea.StrategyAdd<Stg_Fractals>(Fractals_Active_Tf);

@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                 EA31337 - multi-strategy advanced trading robot. |
-//|                       Copyright 2016-2020, 31337 Investments Ltd |
+//|                       Copyright 2016-2021, 31337 Investments Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
 
@@ -38,6 +38,7 @@ input unsigned int BullsPower_Active_Tf = 0;  // BullsPower: Activated timeframe
 input unsigned int BWMFI_Active_Tf = 0;       // BWMFI: Activated timeframes
 input unsigned int CCI_Active_Tf = 15;        // CCI: Activated timeframes
 input unsigned int DeMarker_Active_Tf = 0;    // DeMarker: Activated timeframes
+// input unsigned int ElliottWave_Active_Tf = 0; // ElliottWave: Activated timeframes
 input unsigned int Envelopes_Active_Tf = 4;   // Envelopes: Activated timeframes
 input unsigned int Force_Active_Tf = 0;       // Force: Activated timeframes
 input unsigned int Fractals_Active_Tf = 0;    // Fractals: Activated timeframes
