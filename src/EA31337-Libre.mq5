@@ -244,7 +244,7 @@ bool InitEA() {
   ea_params.SetDesc(ea_desc);
   ea_params.SetVersion(ea_version);
   ea = new EA(ea_params);
-  if (ea.GetState().IsTradeAllowed()) {
+  if (!ea.GetState().IsTradeAllowed()) {
     ea.Log().Error("Trading is not allowed for this symbol, please enable automated trading or check the settings!", __FUNCTION_LINE__);
     _initiated = false;
   }
