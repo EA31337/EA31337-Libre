@@ -34,14 +34,14 @@ jobs:
         with:
           path: src\EA31337-Libre.mq4
           include: src
-          mt-version: 5.0.0.2361
+          mt-version: 4.0.0.1320
           verbose: true
       - name: Compile for MQL5
         uses: fx31337/mql-compile-action@master
         with:
           path: src\EA31337-Libre.mq5
           include: src
-          mt-version: 5.0.0.2515
+          mt-version: 5.0.0.2766
           verbose: true
       - name: List compiled files
         run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
