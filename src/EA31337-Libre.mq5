@@ -98,11 +98,11 @@ void OnDeinit(const int reason) {
  * Invoked when a new tick for a symbol is received, to the chart of which the Expert Advisor is attached.
  */
 void OnTick() {
-  //if (!session_initiated) return;
+  // if (!session_initiated) return;
   EAProcessResult _result = ea.ProcessTick();
   if (_result.stg_processed) {
     if (PrintLogOnChart) {
-      //DisplayInfo();
+      // DisplayInfo();
     }
   }
 }
@@ -245,7 +245,8 @@ bool InitEA() {
   ea_params.SetVersion(ea_version);
   ea = new EA(ea_params);
   if (!ea.GetState().IsTradeAllowed()) {
-    ea.Log().Error("Trading is not allowed for this symbol, please enable automated trading or check the settings!", __FUNCTION_LINE__);
+    ea.Log().Error("Trading is not allowed for this symbol, please enable automated trading or check the settings!",
+                   __FUNCTION_LINE__);
     _initiated = false;
   }
   return _initiated;
@@ -290,7 +291,7 @@ bool InitStrategies() {
   _result &= ea.StrategyAdd<Stg_Stochastic>(Stochastic_Active_Tf);
   _result &= ea.StrategyAdd<Stg_WPR>(WPR_Active_Tf);
   _result &= ea.StrategyAdd<Stg_ZigZag>(ZigZag_Active_Tf);
-  _result &= GetLastError() == 0 || GetLastError() == 5053; // @fixme: error 5053?
+  _result &= GetLastError() == 0 || GetLastError() == 5053;  // @fixme: error 5053?
   ResetLastError();
   return _result;
 }
@@ -298,6 +299,4 @@ bool InitStrategies() {
 /**
  * Deinitialize global class variables.
  */
-void DeinitVars() {
-  Object::Delete(ea);
-}
+void DeinitVars() { Object::Delete(ea); }
