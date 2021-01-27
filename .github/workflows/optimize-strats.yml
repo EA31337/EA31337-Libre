@@ -58,12 +58,6 @@ jobs:
           os.chdir(os.getenv('SETS_DIR'))
           files = glob.glob("*.set")
           print("::set-output name=sets::{}".format(json.dumps(files)))
-        # run: |
-        #   filename = "src/include/inputs.h"
-        #   data = open(filename, "r").read()
-        #   params = re.findall("(\w+_Active_Tf)", data)
-        #   for param in params:
-        #     print("::set-output name=param::{}".format(param))
         shell: python
       - name: Display output
         run: echo ${{ steps.get-sets.outputs.sets }}
@@ -77,8 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        setfile: [AC_Active_Tf.set]
-        # ${{ fromJson(needs.Process.outputs.sets-list) }}
+        setfile: ${{ fromJson(needs.Process.outputs.sets-list) }}
     steps:
       - uses: actions/download-artifact@v2
         with:
