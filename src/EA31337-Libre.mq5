@@ -191,7 +191,7 @@ void OnChartEvent(const int id,          // Event ID.
 bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
   string _output = "";
   ResetLastError();
-  if (ea.GetState().IsOptimizationMode() || (ea.GetState().IsTestingMode() && !ea.GetState().IsTestingVisualMode())) {
+  if (ea.GetState().IsOptimizationMode() || (ea.GetState().IsTestingMode() && !ea.GetState().IsVisualMode())) {
     // Ignore chart updates when optimizing or testing in non-visual mode.
     return false;
   }
