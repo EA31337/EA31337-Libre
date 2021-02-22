@@ -3,71 +3,73 @@ name: Backtest
 
 # yamllint disable-line rule:truthy
 on:
-  pull_request:
-    paths:
-      - '**.mq?'
-      - '.github/workflows/compile.yml'
-      - 'src/include/**'
   push:
-    paths:
-      - '**.mq?'
-      - '.github/workflows/compile.yml'
-      - 'src/include/**'
+    branches:
+      - 'v*-backtest'
+  release:
+    types:
+      - published
 
 jobs:
+
   Compile:
-    defaults:
-      run:
-        shell: powershell
-        working-directory: src
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/checkout@v2
         with:
           submodules: recursive
       - name: List MQL files
         run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
         shell: powershell
-      - name: Compile for MQL4
+      - name: Compiles EA (MQL4)
         uses: fx31337/mql-compile-action@master
         with:
           path: src\EA31337-Libre.mq4
-          include: src
-          mt-version: 4.0.0.1320
           verbose: true
-      - name: Compile for MQL5
+
+      - name: Compiles EA (MQL5)
         uses: fx31337/mql-compile-action@master
         with:
           path: src\EA31337-Libre.mq5
-          include: src
-          mt-version: 5.0.0.2766
           verbose: true
       - name: List compiled files
         run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: ea31337-libre
+          name: EA
           path: 'src/*.ex?'
-  Test:
+
+  Backtest:
+
+    defaults:
+      run:
+        shell: bash
+
     needs: Compile
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        month: [1]
-        year: [2018, 2019]
+        deposit: [10000, 100000]
+        spread: [1, 10]
+        year: [2019]
+
     steps:
+
       - uses: actions/download-artifact@v2
         with:
-          name: ea31337-libre
-      - name: Run backtest
-        uses: ea31337/mql-tester-action@master
+          name: EA
+
+      - name: Test ${{ matrix.year }}.${{ matrix.month }}
+        uses: fx31337/mql-tester-action@master
         with:
-          BtDeposit: 10000
+          BtDeposit: ${{ matrix.deposit }}
           BtDigits: 5
-          BtMonths: ${{ matrix.month }}
+          BtMonths: 1-12
+          BtSpread: ${{ matrix.spread }}
           BtYears: ${{ matrix.year }}
           RunOnWarning: 'show_logs && parse_results $@'
-          TestExpert: "EA31337-Libre"
+          TestExpert: EA31337-Libre
           TestPeriod: M1
