@@ -1,24 +1,20 @@
 ---
-name: Compile
+name: Backtest
 
 # yamllint disable-line rule:truthy
 on:
-  pull_request:
-    paths-ignore:
-      - '**.md'
   push:
-    paths-ignore:
-      - '**.md'
+    branches:
+      - 'v*-backtest'
+  release:
+    types:
+      - published
 
 jobs:
+
   Compile:
-    defaults:
-      run:
-        shell: powershell
-        working-directory: src
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
       - uses: actions/checkout@v2
         with:
           submodules: recursive
@@ -42,5 +38,38 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: EA31337-${{ matrix.mode }}
+          name: EA
           path: 'src/*.ex?'
+
+  Backtest:
+
+    defaults:
+      run:
+        shell: bash
+
+    needs: Compile
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        deposit: [10000, 100000]
+        spread: [1, 10]
+        year: [2019]
+
+    steps:
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: EA
+
+      - name: Test ${{ matrix.year }}.${{ matrix.month }}
+        uses: fx31337/mql-tester-action@master
+        with:
+          BtDeposit: ${{ matrix.deposit }}
+          BtDigits: 5
+          BtMonths: 1-12
+          BtSpread: ${{ matrix.spread }}
+          BtYears: ${{ matrix.year }}
+          RunOnWarning: 'show_logs && parse_results $@'
+          TestExpert: EA31337-Libre
+          TestPeriod: M1

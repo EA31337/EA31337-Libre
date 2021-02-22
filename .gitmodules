@@ -1,6 +1,6 @@
-[submodule "EA31337-classes"]
-	path = src/include/EA31337-classes
+[submodule "classes"]
+	path = src/include/classes
 	url = https://github.com/EA31337/EA31337-classes
-[submodule "EA31337-strategies"]
-	path = src/include/EA31337-strategies
+[submodule "strategies"]
+	path = src/include/strategies
 	url = https://github.com/EA31337/EA31337-strategies

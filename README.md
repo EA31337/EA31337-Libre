@@ -2,21 +2,19 @@
 
 <!--[![Release][github-release-image]][github-release-link]-->
 [![License][license-image]][license-link]
-[![Status][appveyor-ci-build-link]][appveyor-ci-build-image]
 [![Status][gha-image-check-master]][gha-link-check-master]
 [![Status][gha-image-compile-master]][gha-link-compile-master]
 [![Status][gha-image-lint-master]][gha-link-lint-master]
 [![Channel][tg-channel-image]][tg-channel-link]
-[![Chat][tg-chat-image]][tg-chat-link]
 [![Edit][gitpod-image]][gitpod-link]
 
 ## Introduction
 
-EA31337 Libre is free and open-source Forex multi-strategy trading robot written in MQL language.
+EA31337 Libre is free and open-source Forex multi-strategy trading robot written in MQL.
 
 ## About the project
 
-This EA (Expert Advisor) provides simple implementation of
+The project aims to deliver simple implementation of
 [EA31337 framework][gh-ea31337-classes] and [EA31337 strategies][gh-ea31337-strats].
 
 The source code is compatible with MQL4 and MQL5 and can run on MetaTrader 4 and 5.
@@ -24,17 +22,17 @@ The source code is compatible with MQL4 and MQL5 and can run on MetaTrader 4 and
 ### Usage
 
 You can freely use this project for education or research purposes.
-However, **this project is not suitable for the real trading**.
+However, **this project is not suitable for the real trading**
+without relevant knowledge.
 
 For more complex implementation of the same framework,
 please follow alternative [EA31337][gh-ea31337] project.
 
 ### Strategies
 
-The robot comes with over 30 strategies coordinated and controlled
-by the central algorithm (framework engine).
-Each strategy can analyse market conditions
-on multiple timeframes at the same time.
+The robot comes with over 35 strategies coordinated and controlled by the central algorithm.
+Each strategy analyses market on multiple timeframes at the same time.
+The market analysis is based on over 30 major technical indicators in real-time.
 
 You are free to write your own custom strategies.
 
@@ -49,7 +47,7 @@ The backtesting has been documented at [Backtesting using MT4][gh-wiki-backtest]
 
 Few notes to be aware when backtesting:
 
-- Please use M30 or M15 timeframe to have access to multiple timeframes at the same time,
+- Please use M1 timeframe to have access to multiple timeframes at the same time,
   as sometimes not all strategies would be activated (check the logs for details).
   This is due to platform limitations/bugs.
 - Be aware that using
@@ -71,8 +69,9 @@ Few notes to be aware when backtesting:
 
 ## Support
 
-- For bugs/features, raise a [new issue at GitHub](https://github.com/EA31337/EA31337/issues).
-- Join our [Telegram group][tg-chat-link] and [channel][tg-channel-link] for help.
+- For help, open a [new discussion][gh-discuss] to ask questions.
+- For bugs/features, raise a [new issue at GitHub][gh-issues].
+- Join our [Telegram channel][tg-channel-link] for news and discussion group for help.
 
 ## Legal
 
@@ -139,13 +138,8 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 [docker-build-image]: https://images.microbadger.com/badges/image/ea31337/mql-tester-action-action.svg
 [docker-build-link]: https://microbadger.com/images/ea31337/mql-tester-action-action
 
-[tg-channel-image]: https://img.shields.io/badge/Telegram-news-0088CC.svg?logo=telegram
-[tg-channel-link]: https://t.me/EA31337_News
-[tg-chat-image]: https://img.shields.io/badge/Telegram-chat-0088CC.svg?logo=telegram
-[tg-chat-link]: https://t.me/EA31337
-
-[appveyor-ci-build-link]: https://ci.appveyor.com/api/projects/status/xy6iuhtnfst97twd/branch/master?svg=true
-[appveyor-ci-build-image]: https://ci.appveyor.com/project/kenorb/ea31337-libre
+[tg-channel-image]: https://img.shields.io/badge/Telegram-join-0088CC.svg?logo=telegram
+[tg-channel-link]: https://t.me/EA31337
 
 [gha-link-check-master]: https://github.com/EA31337/EA31337-Libre/actions?query=workflow%3ACheck+branch%3Amaster
 [gha-image-check-master]: https://github.com/EA31337/EA31337-Libre/workflows/Check/badge.svg?branch=master
@@ -156,6 +150,9 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 
 [gitpod-image]: https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod
 [gitpod-link]: https://gitpod.io/#https://github.com/EA31337/EA31337-Libre
+
+[gh-discuss]: https://github.com/EA31337/EA31337-Libre/discussions
+[gh-issues]: https://github.com/EA31337/EA31337-Libre/issues
 
 [license-image]: https://img.shields.io/github/license/EA31337/EA31337-Libre.svg
 [license-link]: https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)

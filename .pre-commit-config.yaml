@@ -16,7 +16,7 @@ repos:
         exclude: \.txt$
 
   - repo: https://github.com/igorshubovych/markdownlint-cli.git
-    rev: v0.23.1
+    rev: v0.24.0
     hooks:
       - id: markdownlint
 
@@ -26,8 +26,13 @@ repos:
       - id: forbid-binary
         exclude: (\.ico|\.mqproj)$
       - id: git-check     # Configure in .gitattributes
-      - id: markdownlint  # Configure in .mdlrc
+      #   exclude: \.txt$
+      # @fixme: https://github.com/jumanjihouse/pre-commit-hooks/issues/79
+      # - id: markdownlint  # Configure in .mdlrc
       # - id: require-ascii
+      - id: script-must-have-extension
+      # - id: shellcheck
+      - id: shfmt
 
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.23.0

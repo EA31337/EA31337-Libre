@@ -1,9 +1,8 @@
 //+------------------------------------------------------------------+
 //|            EA31337 Libre - multi-strategy advanced trading robot |
-//|                       Copyright 2016-2020, 31337 Investments Ltd |
+//|                       Copyright 2016-2021, 31337 Investments Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
-
 /*
  *  This file is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,20 +18,8 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// EA defines.
-#define ea_name "EA31337 Libre"
-#define ea_version "1.000"
-#define ea_desc "Multi-strategy advanced trading robot"
-#define ea_link "https://github.com/EA31337/EA31337-Libre"
-#define ea_author "kenorb"
-#define ea_copy "Copyright 2016-2020, kenorb"
-#define ea_file __FILE__
-#define ea_date __DATE__
-#define ea_build __MQLBUILD__
-
 // Includes.
 #include "include/includes.h"
-#include "include/inputs.h"
 
 // EA properties.
 #property strict
@@ -73,25 +60,7 @@ int OnInit() {
 /**
  * Deinitialization function of the expert.
  */
-void OnDeinit(const int reason) {
-  /*
-  if (session_initiated) {
-    string filename;
-    if (WriteSummaryReport && !Terminal::IsOptimization()) {
-      // @todo: if (reason == REASON_CHARTCHANGE)
-      summary_report.CalculateSummary();
-      filename = StringFormat("%s-%.0f%s-%s-%s-%dspread-M%d-report.txt", _Symbol, summary_report.GetInitDeposit(),
-                              account.AccountCurrency(), DateTime::TimeToStr(init_bar_time, TIME_DATE),
-                              DateTime::TimeToStr(TimeCurrent(), TIME_DATE), init_spread, _Period);
-      string data = summary_report.GetReport();
-      // data += Arrays::ArrToString(logger.GetLogs(), "\n", "Report log:\n");
-      Report::WriteReport(filename, data, VerboseLevel >= V_INFO);  // Todo: Add: Errors::GetUninitReasonText(reason)
-      Print(__FUNCTION__ + ": Saved report as: " + filename);
-    }
-  }
-  */
-  DeinitVars();
-}
+void OnDeinit(const int reason) { DeinitVars(); }
 
 /**
  * "Tick" event handler function (EA only).
@@ -99,11 +68,15 @@ void OnDeinit(const int reason) {
  * Invoked when a new tick for a symbol is received, to the chart of which the Expert Advisor is attached.
  */
 void OnTick() {
-  //if (!session_initiated) return;
   EAProcessResult _result = ea.ProcessTick();
-  if (_result.stg_processed) {
-    if (PrintLogOnChart) {
-      //DisplayInfo();
+  if (_result.stg_processed || ea.GetState().new_periods > 0) {
+    if (EA_DisplayDetailsOnChart && Terminal::IsVisualMode()) {
+      string _text = StringFormat("%s v%s by %s (%s)\n", ea_name, ea_version, ea_author, ea_link);
+      _text += SerializerConverter::FromObject(ea, SERIALIZER_FLAG_INCLUDE_DYNAMIC).ToString<SerializerJson>();
+      Comment(_text);
+    }
+    if (ea.GetState().new_periods > 0) {
+      ea.Logger().Flush(10);
     }
   }
 }
@@ -192,7 +165,7 @@ void OnChartEvent(const int id,          // Event ID.
 bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
   string _output = "";
   ResetLastError();
-  if (ea.GetState().IsOptimizationMode() || (ea.GetState().IsTestingMode() && !ea.GetState().IsTestingVisualMode())) {
+  if (ea.GetState().IsOptimizationMode() || (ea.GetState().IsTestingMode() && !ea.GetState().IsVisualMode())) {
     // Ignore chart updates when optimizing or testing in non-visual mode.
     return false;
   }
@@ -201,16 +174,6 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
   _output += "EA: " + ea.ToString() + sep;
   _output += "SYMBOL: " + ea.SymbolInfo().ToString() + sep;
   _output += "MARKET: " + ea.Market().ToString() + sep;
-  // Print strategies info.
-  /*
-  int sid;
-  Strategy *_strat;
-  _output += "STRATEGIES:" + sep;
-  for (sid = 0; sid < strats.GetSize(); sid++) {
-    _strat = ((Strategy *)strats.GetByIndex(sid));
-    _output += _strat.ToString();
-  }
-  */
   if (_startup) {
     if (ea.GetState().IsTradeAllowed()) {
       if (!Terminal::HasError()) {
@@ -239,14 +202,19 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
 bool InitEA() {
   bool _initiated = true;
   EAParams ea_params(__FILE__, VerboseLevel);
-  ea_params.SetChartInfoFreq(PrintLogOnChart ? 2 : 0);
-  ea_params.SetName(ea_name);
+  // ea_params.SetChartInfoFreq(EA_DisplayDetailsOnChart ? 2 : 0);
+  // EA params.
   ea_params.SetAuthor(StringFormat("%s (%s)", ea_author, ea_link));
   ea_params.SetDesc(ea_desc);
+  ea_params.SetName(ea_name);
   ea_params.SetVersion(ea_version);
+  // Risk params.
+  ea_params.SetRiskMarginMax(EA_Risk_MarginMax);
+  // Init instance.
   ea = new EA(ea_params);
-  if (ea.GetState().IsTradeAllowed()) {
-    ea.Log().Error("Trading is not allowed for this symbol, please enable automated trading or check the settings!", __FUNCTION_LINE__);
+  if (!ea.GetState().IsTradeAllowed()) {
+    ea.Log().Error("Trading is not allowed for this symbol, please enable automated trading or check the settings!",
+                   __FUNCTION_LINE__);
     _initiated = false;
   }
   return _initiated;
@@ -256,48 +224,91 @@ bool InitEA() {
  * Init strategies.
  */
 bool InitStrategies() {
-  bool _result = true;
-  long _magic = MagicNumber;
+  bool _res = true;
+  int _magic_step = FINAL_ENUM_TIMEFRAMES_INDEX;
+  long _magic_no = EA_MagicNumber;
   ResetLastError();
-  _result &= ea.StrategyAdd<Stg_AC>(AC_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_AD>(AD_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_ADX>(ADX_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_ATR>(ATR_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Alligator>(Alligator_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Awesome>(Awesome_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_BWMFI>(BWMFI_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Bands>(Bands_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_BearsPower>(BearsPower_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_BullsPower>(BullsPower_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_CCI>(CCI_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_DeMarker>(DeMarker_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Envelopes>(Envelopes_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Force>(Force_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Fractals>(Fractals_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Gator>(Gator_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Ichimoku>(Ichimoku_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_MA>(MA_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_MACD>(MACD_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_MFI>(MFI_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Momentum>(Momentum_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_OBV>(OBV_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_OsMA>(OsMA_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_RSI>(RSI_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_RSI>(RSI_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_RVI>(RVI_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_SAR>(SAR_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_StdDev>(StdDev_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_Stochastic>(Stochastic_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_WPR>(WPR_Active_Tf);
-  _result &= ea.StrategyAdd<Stg_ZigZag>(ZigZag_Active_Tf);
-  _result &= GetLastError() == 0 || GetLastError() == 5053; // @fixme: error 5053?
+  _res &= EAStrategyAdd(EA_Strategy, EA_Strategy_Active_Tf);
+  _res &= GetLastError() == 0 || GetLastError() == 5053;  // @fixme: error 5053?
   ResetLastError();
-  return _result;
+  return _res;
+}
+
+/**
+ * Adds strategy to the given timeframe.
+ */
+bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
+  unsigned int _magic_no = EA_MagicNumber + _stg * FINAL_ENUM_TIMEFRAMES_INDEX;
+  switch (_stg) {
+    case STRAT_AC:
+      return ea.StrategyAdd<Stg_AC>(_tfs, _stg, _magic_no);
+    case STRAT_AD:
+      return ea.StrategyAdd<Stg_AD>(_tfs, _stg, _magic_no);
+    case STRAT_ADX:
+      return ea.StrategyAdd<Stg_ADX>(_tfs, _stg, _magic_no);
+    case STRAT_ATR:
+      return ea.StrategyAdd<Stg_ATR>(_tfs, _stg, _magic_no);
+    case STRAT_ALLIGATOR:
+      return ea.StrategyAdd<Stg_Alligator>(_tfs, _stg, _magic_no);
+    case STRAT_AWESOME:
+      return ea.StrategyAdd<Stg_Awesome>(_tfs, _stg, _magic_no);
+    case STRAT_BWMFI:
+      return ea.StrategyAdd<Stg_BWMFI>(_tfs, _stg, _magic_no);
+    case STRAT_BANDS:
+      return ea.StrategyAdd<Stg_Bands>(_tfs, _stg, _magic_no);
+    case STRAT_BEARS_POWER:
+      return ea.StrategyAdd<Stg_BearsPower>(_tfs, _stg, _magic_no);
+    case STRAT_BULLS_POWER:
+      return ea.StrategyAdd<Stg_BullsPower>(_tfs, _stg, _magic_no);
+    case STRAT_CCI:
+      return ea.StrategyAdd<Stg_CCI>(_tfs, _stg, _magic_no);
+    case STRAT_DEMA:
+      return ea.StrategyAdd<Stg_DEMA>(_tfs, _stg, _magic_no);
+    case STRAT_DEMARKER:
+      return ea.StrategyAdd<Stg_DeMarker>(_tfs, _stg, _magic_no);
+    case STRAT_ENVELOPES:
+      return ea.StrategyAdd<Stg_Envelopes>(_tfs, _stg, _magic_no);
+    case STRAT_EWO:
+      return ea.StrategyAdd<Stg_ElliottWave>(_tfs, _stg, _magic_no);
+    case STRAT_FORCE:
+      return ea.StrategyAdd<Stg_Force>(_tfs, _stg, _magic_no);
+    case STRAT_FRACTALS:
+      return ea.StrategyAdd<Stg_Fractals>(_tfs, _stg, _magic_no);
+    case STRAT_GATOR:
+      return ea.StrategyAdd<Stg_Gator>(_tfs, _stg, _magic_no);
+    case STRAT_ICHIMOKU:
+      return ea.StrategyAdd<Stg_Ichimoku>(_tfs, _stg, _magic_no);
+    case STRAT_MA:
+      return ea.StrategyAdd<Stg_MA>(_tfs, _stg, _magic_no);
+    case STRAT_MACD:
+      return ea.StrategyAdd<Stg_MACD>(_tfs, _stg, _magic_no);
+    case STRAT_MFI:
+      return ea.StrategyAdd<Stg_MFI>(_tfs, _stg, _magic_no);
+    case STRAT_MOMENTUM:
+      return ea.StrategyAdd<Stg_Momentum>(_tfs, _stg, _magic_no);
+    case STRAT_OBV:
+      return ea.StrategyAdd<Stg_OBV>(_tfs, _stg, _magic_no);
+    case STRAT_OSMA:
+      return ea.StrategyAdd<Stg_OsMA>(_tfs, _stg, _magic_no);
+    case STRAT_RSI:
+      return ea.StrategyAdd<Stg_RSI>(_tfs, _stg, _magic_no);
+    case STRAT_RVI:
+      return ea.StrategyAdd<Stg_RVI>(_tfs, _stg, _magic_no);
+    case STRAT_SAR:
+      return ea.StrategyAdd<Stg_SAR>(_tfs, _stg, _magic_no);
+    case STRAT_STDDEV:
+      return ea.StrategyAdd<Stg_StdDev>(_tfs, _stg, _magic_no);
+    case STRAT_STOCHASTIC:
+      return ea.StrategyAdd<Stg_Stochastic>(_tfs, _stg, _magic_no);
+    case STRAT_WPR:
+      return ea.StrategyAdd<Stg_WPR>(_tfs, _stg, _magic_no);
+    case STRAT_ZIGZAG:
+      return ea.StrategyAdd<Stg_ZigZag>(_tfs, _stg, _magic_no);
+  }
+  return _stg == STRAT_NONE;
 }
 
 /**
  * Deinitialize global class variables.
  */
-void DeinitVars() {
-  Object::Delete(ea);
-}
+void DeinitVars() { Object::Delete(ea); }
