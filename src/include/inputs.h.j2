@@ -23,48 +23,22 @@
 //| Inputs.
 //+------------------------------------------------------------------+
 
-// Includes strategies.
-input static string __Strategy_Timeframes__ =
-    "-- Strategy's timeframes --";      // >>> STRATEGY'S TIMEFRAMES (1-255: M1=1,M5=2,M15=4,M30=8,H1=16,H4=32...) <<<
-input unsigned int AC_Active_Tf = {{ AC_Active_Tf | default(0) | int }};   // AC: Activated timeframes
-input unsigned int AD_Active_Tf = {{ AD_Active_Tf | default(0) | int }};   // AD: Activated timeframes
-input unsigned int ADX_Active_Tf = {{ ADX_Active_Tf | default(0) | int }};  // ADX: Activated timeframes
-input unsigned int Alligator_Active_Tf = {{ Alligator_Active_Tf | default(0) | int }};   // Alligator: Activated timeframes
-input unsigned int ATR_Active_Tf = {{ ATR_Active_Tf | default(0) | int }};         // ATR: Activated timeframes
-input unsigned int Awesome_Active_Tf = {{ Awesome_Active_Tf | default(0) | int }};     // Awesome: Activated timeframes
-input unsigned int Bands_Active_Tf = {{ Bands_Active_Tf | default(0) | int }};       // Bands: Activated timeframes
-input unsigned int BearsPower_Active_Tf = {{ BearsPower_Active_Tf | default(0) | int }};  // BearsPower: Activated timeframes
-input unsigned int BullsPower_Active_Tf = {{ BullsPower_Active_Tf | default(0) | int }};  // BullsPower: Activated timeframes
-input unsigned int BWMFI_Active_Tf = {{ BWMFI_Active_Tf | default(0) | int }};       // BWMFI: Activated timeframes
-input unsigned int CCI_Active_Tf = {{ CCI_Active_Tf | default(0) | int }};         // CCI: Activated timeframes
-input unsigned int DeMarker_Active_Tf = {{ DeMarker_Active_Tf | default(0) | int }};    // DeMarker: Activated timeframes
-input unsigned int ElliottWave_Active_Tf = {{ ElliottWave_Active_Tf | default(0) | int }};  // ElliottWave: Activated timeframes
-input unsigned int Envelopes_Active_Tf = {{ Envelopes_Active_Tf | default(0) | int }};   // Envelopes: Activated timeframes
-input unsigned int Force_Active_Tf = {{ Force_Active_Tf | default(0) | int }};       // Force: Activated timeframes
-input unsigned int Fractals_Active_Tf = {{ Fractals_Active_Tf | default(0) | int }};    // Fractals: Activated timeframes
-input unsigned int Gator_Active_Tf = {{ Gator_Active_Tf | default(0) | int }};       // Gator: Activated timeframes
-input unsigned int Ichimoku_Active_Tf = {{ Ichimoku_Active_Tf | default(0) | int }};    // Ichimoku: Activated timeframes
-input unsigned int MA_Active_Tf = {{ MA_Active_Tf | default(0) | int }};          // MA: Activated timeframes
-input unsigned int MACD_Active_Tf = {{ MACD_Active_Tf | default(0) | int }};        // MACD: Activated timeframes
-input unsigned int MFI_Active_Tf = {{ MFI_Active_Tf | default(0) | int }};         // MFI: Activated timeframes
-input unsigned int Momentum_Active_Tf = {{ Momentum_Active_Tf | default(0) | int }};    // Momentum: Activated timeframes
-input unsigned int OBV_Active_Tf = {{ OBV_Active_Tf | default(0) | int }};         // OBV: Activated timeframes
-input unsigned int OsMA_Active_Tf = {{ OsMA_Active_Tf | default(0) | int }};        // OsMA: Activated timeframes
-input unsigned int RSI_Active_Tf = {{ RSI_Active_Tf | default(0) | int }};         // RSI: Activated timeframes
-input unsigned int RVI_Active_Tf = {{ RVI_Active_Tf | default(0) | int }};         // RVI: Activated timeframes
-input unsigned int SAR_Active_Tf = {{ SAR_Active_Tf | default(0) | int }};         // SAR: Activated timeframes
-input unsigned int StdDev_Active_Tf = {{ StdDev_Active_Tf | default(0) | int }};      // StdDev: Activated timeframes
-input unsigned int Stochastic_Active_Tf = {{ Stochastic_Active_Tf | default(0) | int }};  // Stochastic: Activated timeframes
-input unsigned int WPR_Active_Tf = {{ WPR_Active_Tf | default(0) | int }};         // WPR: Activated timeframes
-input unsigned int ZigZag_Active_Tf = {{ ZigZag_Active_Tf | default(0) | int }};      // ZigZag: Activated timeframes
+input static string __Strategy_Active__ = "-- Active strategy --";  // >>> ACTIVE STRATEGY <<<
+input ENUM_STRATEGY EA_Strategy = (ENUM_STRATEGY)STRAT_RSI;         // Strategy
+input static string __Strategy_Timeframes__ = "-- [M1=1,M5=2,M15=4,M30=8,H1=16,H8=32...] --";  // >>> TIMEFRAMES <<<
+input unsigned int EA_Strategy_Active_Tf = 15;                                                 // Timeframes
+
+extern string __EA_Risk_Params__ = "-- EA's risk management --";  // >>> EA's RISK <<<
+input float EA_Risk_MarginMax = 5.0f;                             // Max margin to risk (in %)
 
 input string __Logging_Parameters__ = "-- Settings for logging & messages --";  // >>> LOGS & MESSAGES <<<
 input bool PrintLogOnChart = true;                                              // Display info on chart
 input ENUM_LOG_LEVEL VerboseLevel = V_INFO;                                     // Level of log verbosity
-input bool WriteSummaryReport = true;                                           // Write summary report on finish
+// input bool WriteSummaryReport = true;                                           // Write summary report on finish
 
 input string __Other_Parameters__ = "-- Other parameters --";  // >>> OTHER PARAMETERS <<<
-input uint MagicNumber = 31337;                                // Starting EA magic number
+input bool EA_DisplayDetailsOnChart = true;                    // Display EA details on chart
+input uint EA_MagicNumber = 31337;                             // Starting EA magic number
 
 input string __EA_Parameters__ =
     "-- End of input parameters for " + ea_name + " v" + ea_version + " --";  // >>> EA31337 <<<
