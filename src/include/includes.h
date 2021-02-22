@@ -65,6 +65,15 @@
 #include "classes/Indicators/Indi_WPR.mqh"
 #include "classes/Indicators/Indi_ZigZag.mqh"
 
+// Strategy enums.
+#include "strategies/enum.h"
+
+// Defines.
+#include "define.h"
+
+// Main user inputs.
+#include "inputs.h"
+
 // Strategy includes.
 INPUT string __Strategy_Parameters__ = "-- Strategy parameters --";  // >>> STRATEGIES <<<
 #include "strategies/strategies.h"
