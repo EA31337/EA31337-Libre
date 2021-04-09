@@ -70,6 +70,6 @@ jobs:
           BtMonths: 1-12
           BtSpread: ${{ matrix.spread }}
           BtYears: ${{ matrix.year }}
-          RunOnWarning: 'show_logs && parse_results $@'
+          RunOnError: 'show_logs && parse_results $@; exit 0'
           TestExpert: EA31337-Libre
           TestPeriod: M1
