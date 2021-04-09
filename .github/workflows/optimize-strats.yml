@@ -45,7 +45,7 @@ jobs:
           path: 'src/*.ex?'
   Process:
     env:
-      SETS_DIR: sets/optimize/strategies
+      SETS_DIR: sets/optimize/strats
     outputs:
       sets-list: ${{ steps.get-sets.outputs.sets }}
     runs-on: ubuntu-latest
@@ -82,7 +82,7 @@ jobs:
         with:
           BtDeposit: 100000
           BtDest: ${{ github.workspace }}/_results
-          BtMonths: 11-12
+          BtMonths: 10-12
           BtPair: EURUSD
           BtYears: 2019
           OptFormatBrief: true
@@ -92,6 +92,7 @@ jobs:
           SetFile: ${{ github.workspace }}/sets/${{ matrix.setfile }}
           SetParams: ${{ steps.data.outputs.param }}
           TestExpert: "EA31337-Libre"
+          TestLimitOpts: maxdrawdown_enable=1,maxdrawdown=5
           TestPeriod: M1
           TestReportName: Report
       - name: Upload result files
