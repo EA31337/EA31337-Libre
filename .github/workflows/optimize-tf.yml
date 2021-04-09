@@ -1,11 +1,11 @@
 ---
-name: Optimize Strategies
+name: Optimize Timeframes
 
 # yamllint disable-line rule:truthy
 on:
   push:
     branches:
-      - 'optimize-strats'
+      - 'optimize-tf'
 
 jobs:
   Compile:
@@ -45,7 +45,7 @@ jobs:
           path: 'src/*.ex?'
   Process:
     env:
-      SETS_DIR: sets/optimize/strats
+      SETS_DIR: sets/optimize/tf
     outputs:
       sets-list: ${{ steps.get-sets.outputs.sets }}
     runs-on: ubuntu-latest
