@@ -1,8 +1,9 @@
 //+------------------------------------------------------------------+
-//|            EA31337 Libre - multi-strategy advanced trading robot |
-//|                       Copyright 2016-2021, 31337 Investments Ltd |
+//|                              EA31337 Libre - Forex trading robot |
+//|                                 Copyright 2016-2021, EA31337 Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
+
 /*
  *  This file is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,11 +21,8 @@
 
 // EA defines.
 #define ea_name "EA31337 Libre"
-#define ea_version "1.000"
-#define ea_desc "Multi-strategy trading robot"
+#define ea_version "1.001"
+#define ea_desc "Forex trading robot"
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"
-#define ea_copy "Copyright 2016-2021, kenorb"
-#define ea_file __FILE__
-#define ea_date __DATE__
-#define ea_build __MQLBUILD__
+#define ea_copy "Copyright 2016-2021, EA31337 Ltd"

@@ -1,8 +1,9 @@
 //+------------------------------------------------------------------+
-//|            EA31337 Libre - multi-strategy advanced trading robot |
-//|                       Copyright 2016-2021, 31337 Investments Ltd |
+//|                              EA31337 Libre - Forex trading robot |
+//|                                 Copyright 2016-2021, EA31337 Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
+
 /*
  *  This file is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,15 +23,13 @@
 #include "include/includes.h"
 
 // EA properties.
-#property strict
-#property version ea_version
 #ifdef __MQL4__
+#property copyright ea_copy
 #property description ea_name
 #property description ea_desc
-#endif
 #property link ea_link
-#property copyright ea_copy
-//#property icon        "..\\resources\\favicon.ico"
+#property version ea_version
+#endif
 
 // Global variables.
 EA *ea;

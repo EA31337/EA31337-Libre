@@ -42,5 +42,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: EA31337-${{ matrix.mode }}
+          name: EA
           path: 'src/*.ex?'
