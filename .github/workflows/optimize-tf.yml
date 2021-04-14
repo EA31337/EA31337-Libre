@@ -68,7 +68,7 @@ jobs:
           path: ${{ env.SETS_DIR }}
   Optimize:
     needs: [Compile, Process]
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
     strategy:
       matrix:
         setfile: ${{ fromJson(needs.Process.outputs.sets-list) }}
