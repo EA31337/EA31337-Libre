@@ -68,7 +68,7 @@ jobs:
     strategy:
       matrix:
         month: [1, 2]
-        year: [2019]
+        year: [2020]
 
     steps:
 
