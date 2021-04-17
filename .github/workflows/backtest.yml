@@ -54,7 +54,7 @@ jobs:
       matrix:
         deposit: [10000, 100000]
         spread: [1, 10]
-        year: [2019]
+        year: [2020]
 
     steps:
 
