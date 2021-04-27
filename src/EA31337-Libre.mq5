@@ -203,12 +203,12 @@ bool InitEA() {
   EAParams ea_params(__FILE__, VerboseLevel);
   // ea_params.SetChartInfoFreq(EA_DisplayDetailsOnChart ? 2 : 0);
   // EA params.
-  ea_params.SetAuthor(StringFormat("%s (%s)", ea_author, ea_link));
-  ea_params.SetDesc(ea_desc);
-  ea_params.SetName(ea_name);
-  ea_params.SetVersion(ea_version);
+  ea_params.Set(EA_PARAM_AUTHOR, StringFormat("%s (%s)", ea_author, ea_link));
+  ea_params.Set(EA_PARAM_DESC, ea_desc);
+  ea_params.Set(EA_PARAM_NAME, ea_name);
+  ea_params.Set(EA_PARAM_VER, ea_version);
   // Risk params.
-  ea_params.SetRiskMarginMax(EA_Risk_MarginMax);
+  ea_params.Set(EA_PARAM_RISK_MARGIN_MAX, EA_Risk_MarginMax);
   // Init instance.
   ea = new EA(ea_params);
   if (!ea.GetState().IsTradeAllowed()) {
