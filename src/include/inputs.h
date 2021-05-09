@@ -24,7 +24,7 @@
 //+------------------------------------------------------------------+
 
 input static string __Strategy_Active__ = "-- Active strategy --";  // >>> ACTIVE STRATEGY <<<
-input ENUM_STRATEGY EA_Strategy = (ENUM_STRATEGY)STRAT_MFI;         // Strategy
+input ENUM_STRATEGY EA_Strategy = (ENUM_STRATEGY)STRAT_DEMARKER;    // Strategy
 input static string __Strategy_Timeframes__ = "-- [M1=1,M5=2,M15=4,M30=8,H1=16,H8=32...] --";  // >>> TIMEFRAMES <<<
 input unsigned int EA_Strategy_Active_Tf = 12;                                                 // Timeframes
 
