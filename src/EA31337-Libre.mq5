@@ -47,7 +47,9 @@ int OnInit() {
   if (GetLastError() > 0) {
     ea.Log().Error("Error during initializing!", __FUNCTION_LINE__, Terminal::GetLastErrorText());
   }
-  DisplayStartupInfo(true);
+  if (EA_DisplayDetailsOnChart) {
+    DisplayStartupInfo(true);
+  }
   ea.Log().Flush();
   Chart::WindowRedraw();
   if (!_initiated) {
