@@ -10,7 +10,7 @@
 
 ## Introduction
 
-EA31337 Libre is free and open-source Forex multi-strategy trading robot written in MQL.
+EA31337 Libre is free and open-source multi-strategy Forex trading robot written in MQL.
 
 ## About the project
 
