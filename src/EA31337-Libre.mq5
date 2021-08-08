@@ -170,7 +170,7 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
     // Ignore chart updates when optimizing or testing in non-visual mode.
     return false;
   }
-  _output += "TERMINAL: " + ea.Terminal().ToString() + sep;
+  _output += "TERMINAL: " + ea.GetTerminal().ToString() + sep;
   _output += "ACCOUNT: " + ea.Account().ToString() + sep;
   _output += "EA: " + ea.ToString() + sep;
   _output += "SYMBOL: " + ea.SymbolInfo().ToString() + sep;
