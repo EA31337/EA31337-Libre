@@ -25,6 +25,7 @@
 #include "classes/EA.mqh"
 #include "classes/Log.mqh"
 #include "classes/Order.mqh"
+#include "classes/Pattern.mqh"
 #include "classes/Report.mqh"
 #include "classes/Strategy.mqh"
 #include "classes/SummaryReport.mqh"
@@ -56,6 +57,7 @@
 #include "classes/Indicators/Indi_Momentum.mqh"
 #include "classes/Indicators/Indi_OBV.mqh"
 #include "classes/Indicators/Indi_OsMA.mqh"
+#include "classes/Indicators/Indi_Pattern.mqh"
 #include "classes/Indicators/Indi_Price.mqh"
 #include "classes/Indicators/Indi_RSI.mqh"
 #include "classes/Indicators/Indi_RVI.mqh"
@@ -65,7 +67,8 @@
 #include "classes/Indicators/Indi_WPR.mqh"
 #include "classes/Indicators/Indi_ZigZag.mqh"
 
-// Strategy enums.
+// Enums.
+#include "enum.h"
 #include "strategies/enum.h"
 
 // Defines.

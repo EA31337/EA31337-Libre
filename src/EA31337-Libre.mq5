@@ -269,14 +269,14 @@ bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
       return ea.StrategyAdd<Stg_DeMarker>(_tfs, _stg, _magic_no);
     case STRAT_ENVELOPES:
       return ea.StrategyAdd<Stg_Envelopes>(_tfs, _stg, _magic_no);
-    case STRAT_EWO:
-      return ea.StrategyAdd<Stg_ElliottWave>(_tfs, _stg, _magic_no);
     case STRAT_FORCE:
       return ea.StrategyAdd<Stg_Force>(_tfs, _stg, _magic_no);
     case STRAT_FRACTALS:
       return ea.StrategyAdd<Stg_Fractals>(_tfs, _stg, _magic_no);
     case STRAT_GATOR:
       return ea.StrategyAdd<Stg_Gator>(_tfs, _stg, _magic_no);
+    case STRAT_HEIKEN_ASHI:
+      return ea.StrategyAdd<Stg_HeikenAshi>(_tfs, _stg, _magic_no);
     case STRAT_ICHIMOKU:
       return ea.StrategyAdd<Stg_Ichimoku>(_tfs, _stg, _magic_no);
     case STRAT_MA:
@@ -291,6 +291,8 @@ bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
       return ea.StrategyAdd<Stg_OBV>(_tfs, _stg, _magic_no);
     case STRAT_OSMA:
       return ea.StrategyAdd<Stg_OsMA>(_tfs, _stg, _magic_no);
+    case STRAT_PATTERN:
+      return ea.StrategyAdd<Stg_Pattern>(_tfs, _stg, _magic_no);
     case STRAT_RSI:
       return ea.StrategyAdd<Stg_RSI>(_tfs, _stg, _magic_no);
     case STRAT_RVI:
