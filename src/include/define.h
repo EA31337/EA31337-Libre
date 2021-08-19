@@ -26,3 +26,10 @@
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"
 #define ea_copy "Copyright 2016-2021, EA31337 Ltd"
+
+// Other defines.
+//#define __config__  // Loads params from the config files.
+//#define __debug__        // Enables debugging.
+//#define __input__  // Enables input parameters.
+//#define __optimize__     // Enables optimization mode.
+//#define __resource__  // Enables resources.

@@ -22,23 +22,40 @@
 //+------------------------------------------------------------------+
 //| Inputs.
 //+------------------------------------------------------------------+
-
+input string __EA_Params__ =
+    ">> " + ea_name + " v" + ea_version + " build " + (string)(int)__DATETIME__ + " <<";  // >>> EA31337 Libre <<<
+#ifdef __MQL4__
+// input static string __Strategy_Active__ = "-- Active strategy --";  // >>> ACTIVE STRATEGY <<<
+#else
+// input group "" + ea_name + " v" + ea_version
+#endif
+#ifdef __MQL4__
 input static string __Strategy_Active__ = "-- Active strategy --";  // >>> ACTIVE STRATEGY <<<
-input ENUM_STRATEGY EA_Strategy = (ENUM_STRATEGY)STRAT_AWESOME;     // Strategy
-input static string __Strategy_Timeframes__ = "-- [M1=1,M5=2,M15=4,M30=8,H1=16,H8=32...] --";  // >>> TIMEFRAMES <<<
-input unsigned int EA_Strategy_Active_Tf = 12;                                                 // Timeframes
+#else
+input group "Active strategy"
+#endif
+input ENUM_STRATEGY EA_Strategy = STRAT_BANDS;  // Strategy
+input unsigned int EA_Strategy_Active_Tf = 28;  // Timeframes [M1=1,M5=2,M15=4,M30=8,H1=16,H8=32...]
 
-extern string __EA_Risk_Params__ = "-- EA's risk management --";  // >>> EA's RISK <<<
-input float EA_Risk_MarginMax = 5.0f;                             // Max margin to risk (in %)
+#ifdef __MQL4__
+extern string __EA_Risk_Params__ = "-- Risk management --";  // >>> RISK <<<
+#else
+input group "Risk management"
+#endif
+input float EA_Risk_MarginMax = 5.0f;  // Max margin to risk (in %)
 
-input string __Logging_Parameters__ = "-- Settings for logging & messages --";  // >>> LOGS & MESSAGES <<<
-input bool PrintLogOnChart = true;                                              // Display info on chart
-input ENUM_LOG_LEVEL VerboseLevel = V_INFO;                                     // Level of log verbosity
+#ifdef __MQL4__
+input string __Logging_Params__ = "-- Logging & messaging --";  // >>> LOGS & MESSAGES <<<
+#else
+input group "Logging & messaging"
+#endif
+input bool EA_DisplayDetailsOnChart = true;  // Display EA details on chart
+input ENUM_LOG_LEVEL VerboseLevel = V_INFO;  // Level of log verbosity
 // input bool WriteSummaryReport = true;                                           // Write summary report on finish
 
-input string __Other_Parameters__ = "-- Other parameters --";  // >>> OTHER PARAMETERS <<<
-input bool EA_DisplayDetailsOnChart = true;                    // Display EA details on chart
-input uint EA_MagicNumber = 31337;                             // Starting EA magic number
-
-input string __EA_Parameters__ =
-    "-- End of input parameters for " + ea_name + " v" + ea_version + " --";  // >>> EA31337 <<<
+#ifdef __MQL4__
+input string __Trade_Params__ = "-- Trade parameters --";  // >>> TRADE <<<
+#else
+input group "Trade parameters"
+#endif
+input uint EA_MagicNumber = 31337;  // Starting EA magic number
