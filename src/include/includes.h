@@ -19,6 +19,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// Defines.
+#include "define.h"
+
 // Includes EA framework.
 #include "classes/Account.mqh"
 #include "classes/Chart.mqh"
@@ -70,9 +73,6 @@
 // Enums.
 #include "enum.h"
 #include "strategies/enum.h"
-
-// Defines.
-#include "define.h"
 
 // Main user inputs.
 #include "inputs.h"
