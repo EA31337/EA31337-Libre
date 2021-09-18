@@ -39,7 +39,7 @@ extern string __EA_Risk_Params__ = "-- Risk management --";  // >>> RISK <<<
 #else
 input group "Risk management"
 #endif
-input float EA_Risk_MarginMax = 5.0f;  // Max margin to risk (in %)
+input float EA_Risk_MarginMax = 1.0f;  // Max margin to risk (in %)
 
 #ifdef __MQL4__
 input string __Logging_Params__ = "-- Logging & messaging --";  // >>> LOGS & MESSAGES <<<
