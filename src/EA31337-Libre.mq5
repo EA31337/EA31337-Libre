@@ -245,6 +245,10 @@ bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
       return ea.StrategyAdd<Stg_AD>(_tfs, _magic_no, _stg);
     case STRAT_ADX:
       return ea.StrategyAdd<Stg_ADX>(_tfs, _magic_no, _stg);
+    case STRAT_AMA:
+      return ea.StrategyAdd<Stg_AMA>(_tfs, _magic_no, _stg);
+    case STRAT_ASI:
+      return ea.StrategyAdd<Stg_ASI>(_tfs, _magic_no, _stg);
     case STRAT_ATR:
       return ea.StrategyAdd<Stg_ATR>(_tfs, _magic_no, _stg);
     case STRAT_ALLIGATOR:
@@ -261,6 +265,8 @@ bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
       return ea.StrategyAdd<Stg_BullsPower>(_tfs, _magic_no, _stg);
     case STRAT_CCI:
       return ea.StrategyAdd<Stg_CCI>(_tfs, _magic_no, _stg);
+    case STRAT_CHAIKIN:
+      return ea.StrategyAdd<Stg_Chaikin>(_tfs, _magic_no, _stg);
     case STRAT_DEMA:
       return ea.StrategyAdd<Stg_DEMA>(_tfs, _magic_no, _stg);
     case STRAT_DEMARKER:
@@ -291,6 +297,8 @@ bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
       return ea.StrategyAdd<Stg_OsMA>(_tfs, _magic_no, _stg);
     case STRAT_PATTERN:
       return ea.StrategyAdd<Stg_Pattern>(_tfs, _magic_no, _stg);
+    case STRAT_PIVOT:
+      return ea.StrategyAdd<Stg_Pivot>(_tfs, _magic_no, _stg);
     case STRAT_RSI:
       return ea.StrategyAdd<Stg_RSI>(_tfs, _magic_no, _stg);
     case STRAT_RVI:
