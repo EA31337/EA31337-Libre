@@ -31,8 +31,7 @@ input group "Trading strategy"
 #endif
 input ENUM_STRATEGY EA_Strategy = STRAT_MOMENTUM;  // Strategy
 input unsigned int EA_Strategy_Active_Tf =
-    (1 << H1) + (1 << H2) + (1 << H3) + (1 << H4) + (1 << H6) +
-    (1 << H8);  // Timeframes (M1=1,M2=2,M5=16,M15=256,M30=1024,H1=2048,H2,H3,H4,H6,H8)
+    H1B + H2B + H3B + H4B + H6B + H8B;  // Timeframes (M1=1,M2=2,M5=16,M15=256,M30=1024,H1=2048,H2,H3,H4,H6,H8)
 
 #ifdef __MQL4__
 extern string __EA_Risk_Params__ = "-- Risk management --";  // >>> RISK <<<
