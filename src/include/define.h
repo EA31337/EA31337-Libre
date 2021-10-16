@@ -21,7 +21,7 @@
 
 // EA defines.
 #define ea_name "EA31337 Libre"
-#define ea_version "1.007"
+#define ea_version "1.008"
 #define ea_desc "Forex trading robot"
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"

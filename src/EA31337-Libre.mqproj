@@ -3,7 +3,7 @@
   "program_type":"expert",
   "copyright"   :"Copyright 2016-2021, EA31337 Ltd",
   "link"        :"https:\/\/github.com\/EA31337\/EA31337-Libre",
-  "version"     :"1.007",
+  "version"     :"1.008",
   "description" :"Forex trading robot",
   "optimize"    :"0",
   "fpzerocheck" :"1",
@@ -620,77 +620,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\AC\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AC\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AC\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AC\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AC\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AC\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AC\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\AD\\Stg_AD.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AD\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AD\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AD\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AD\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AD\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AD\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\AD\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -700,77 +630,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\ADX\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ADX\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ADX\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ADX\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ADX\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ADX\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ADX\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\ATR\\Stg_ATR.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ATR\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ATR\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ATR\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ATR\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ATR\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ATR\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ATR\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -780,77 +640,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\Alligator\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Alligator\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Alligator\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Alligator\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Alligator\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Alligator\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Alligator\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\Awesome\\Stg_Awesome.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Awesome\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Awesome\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Awesome\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Awesome\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Awesome\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Awesome\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Awesome\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -860,77 +650,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\BWMFI\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BWMFI\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BWMFI\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BWMFI\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BWMFI\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BWMFI\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BWMFI\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\Bands\\Stg_Bands.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Bands\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Bands\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Bands\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Bands\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Bands\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Bands\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Bands\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -940,77 +660,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\BearsPower\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BearsPower\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BearsPower\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BearsPower\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BearsPower\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BearsPower\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BearsPower\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\BullsPower\\Stg_BullsPower.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BullsPower\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BullsPower\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BullsPower\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BullsPower\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BullsPower\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BullsPower\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\BullsPower\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1020,117 +670,12 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\CCI\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\CCI\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\CCI\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\CCI\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\CCI\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\CCI\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\CCI\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\DEMA\\Stg_DEMA.mqh",
       "compile":"false",
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\DEMA\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DEMA\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DEMA\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DEMA\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DEMA\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DEMA\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DEMA\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\DeMarker\\Stg_DeMarker.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DeMarker\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DeMarker\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DeMarker\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DeMarker\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DeMarker\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DeMarker\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\DeMarker\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1145,77 +690,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\ElliottWave\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ElliottWave\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ElliottWave\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ElliottWave\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ElliottWave\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ElliottWave\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ElliottWave\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\Envelopes\\Stg_Envelopes.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Envelopes\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Envelopes\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Envelopes\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Envelopes\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Envelopes\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Envelopes\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Envelopes\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1225,77 +700,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\Force\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Force\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Force\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Force\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Force\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Force\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Force\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\Fractals\\Stg_Fractals.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Fractals\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Fractals\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Fractals\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Fractals\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Fractals\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Fractals\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Fractals\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1305,77 +710,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\Gator\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Gator\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Gator\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Gator\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Gator\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Gator\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Gator\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\HeikenAshi\\Stg_HeikenAshi.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\HeikenAshi\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\HeikenAshi\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\HeikenAshi\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\HeikenAshi\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\HeikenAshi\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\HeikenAshi\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\HeikenAshi\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1385,77 +720,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\Ichimoku\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Ichimoku\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Ichimoku\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Ichimoku\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Ichimoku\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Ichimoku\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Ichimoku\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\MA\\Stg_MA.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MA\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MA\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MA\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MA\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MA\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MA\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MA\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1465,77 +730,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\MACD\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MACD\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MACD\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MACD\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MACD\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MACD\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MACD\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\MFI\\Stg_MFI.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MFI\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MFI\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MFI\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MFI\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MFI\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MFI\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\MFI\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1545,77 +740,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\Momentum\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Momentum\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Momentum\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Momentum\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Momentum\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Momentum\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Momentum\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\OBV\\Stg_OBV.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OBV\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OBV\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OBV\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OBV\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OBV\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OBV\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OBV\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1625,77 +750,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\OSMA\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OSMA\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OSMA\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OSMA\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OSMA\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OSMA\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\OSMA\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\RSI\\Stg_RSI.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RSI\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RSI\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RSI\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RSI\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RSI\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RSI\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RSI\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1705,77 +760,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\RVI\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RVI\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RVI\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RVI\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RVI\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RVI\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\RVI\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\SAR\\Stg_SAR.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAR\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAR\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAR\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAR\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAR\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAR\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAR\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1790,77 +775,7 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\SAWA\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAWA\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAWA\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAWA\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAWA\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAWA\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\SAWA\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\StdDev\\Stg_StdDev.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\StdDev\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\StdDev\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\StdDev\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\StdDev\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\StdDev\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\StdDev\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\StdDev\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
@@ -1870,117 +785,12 @@
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\Stochastic\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Stochastic\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Stochastic\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Stochastic\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Stochastic\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Stochastic\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\Stochastic\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\WPR\\Stg_WPR.mqh",
       "compile":"false",
       "relative_to_project":"true"
     },
     {
-      "path":".\\include\\strategies\\WPR\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\WPR\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\WPR\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\WPR\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\WPR\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\WPR\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\WPR\\config\\EURUSD_M5.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
       "path":".\\include\\strategies\\ZigZag\\Stg_ZigZag.mqh",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ZigZag\\config\\EURUSD_H1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ZigZag\\config\\EURUSD_H4.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ZigZag\\config\\EURUSD_H8.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ZigZag\\config\\EURUSD_M1.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ZigZag\\config\\EURUSD_M15.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ZigZag\\config\\EURUSD_M30.h",
-      "compile":"false",
-      "relative_to_project":"true"
-    },
-    {
-      "path":".\\include\\strategies\\ZigZag\\config\\EURUSD_M5.h",
       "compile":"false",
       "relative_to_project":"true"
     },
