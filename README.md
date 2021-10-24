@@ -5,7 +5,6 @@
 [![Status][gha-image-check-master]][gha-link-check-master]
 [![Status][gha-image-compile-master]][gha-link-compile-master]
 [![Channel][tg-channel-image]][tg-channel-link]
-[![Edit][gitpod-image]][gitpod-link]
 
 ## Introduction
 
@@ -41,7 +40,10 @@ You are free to write your own custom strategies.
 
 Please be aware that backtesting cannot reliabily simulate the future outcome.
 
-The backtesting has been documented at [Backtesting using MT4][gh-wiki-backtest] wiki page.
+It is recommended to use MetaTrader 5 for the backtesting and optimization.
+
+For MetaTrader 4, the backtesting has been documented
+at [Backtesting using MT4][gh-wiki-backtest] wiki page.
 
 ## Support
 
@@ -122,9 +124,6 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 [gha-image-check-master]: https://github.com/EA31337/EA31337-Libre/workflows/Check/badge.svg?branch=master
 [gha-link-compile-master]: https://github.com/EA31337/EA31337-Libre/actions?query=workflow%3ACompile+branch%3Amaster
 [gha-image-compile-master]: https://github.com/EA31337/EA31337-Libre/workflows/Compile/badge.svg?branch=master
-
-[gitpod-image]: https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod
-[gitpod-link]: https://gitpod.io/#https://github.com/EA31337/EA31337-Libre
 
 [gh-discuss]: https://github.com/EA31337/EA31337-Libre/discussions
 [gh-issues]: https://github.com/EA31337/EA31337-Libre/issues
