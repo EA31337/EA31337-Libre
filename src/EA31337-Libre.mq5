@@ -228,7 +228,6 @@ bool InitStrategies() {
   long _magic_no = EA_MagicNumber;
   ResetLastError();
   _res &= EAStrategyAdd(EA_Strategy, EA_Strategy_Active_Tf);
-  _res &= GetLastError() == 0 || GetLastError() == 5053;  // @fixme: error 5053?
   ResetLastError();
   return _res;
 }
