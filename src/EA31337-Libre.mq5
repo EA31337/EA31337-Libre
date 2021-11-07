@@ -70,14 +70,12 @@ void OnDeinit(const int reason) { DeinitVars(); }
  */
 void OnTick() {
   EAProcessResult _result = ea.ProcessTick();
-  if (_result.stg_processed || ea.GetState().new_periods > 0) {
+  if (_result.stg_processed_periods > 0) {
     if (EA_DisplayDetailsOnChart && (Terminal::IsVisualMode() || Terminal::IsRealtime())) {
       string _text = StringFormat("%s v%s by %s (%s)\n", ea_name, ea_version, ea_author, ea_link);
       _text += SerializerConverter::FromObject(ea, SERIALIZER_FLAG_INCLUDE_DYNAMIC).ToString<SerializerJson>();
+      _text += ea.GetLogger().ToString();
       Comment(_text);
-    }
-    if (ea.GetState().new_periods > 0) {
-      ea.GetLogger().Flush(10);
     }
   }
 }
@@ -173,8 +171,6 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
   _output += "TERMINAL: " + ea.GetTerminal().ToString() + sep;
   _output += "ACCOUNT: " + ea.Account().ToString() + sep;
   _output += "EA: " + ea.ToString() + sep;
-  _output += "SYMBOL: " + ea.SymbolInfo().ToString() + sep;
-  _output += "MARKET: " + ea.Market().ToString() + sep;
   if (_startup) {
     if (ea.GetState().IsTradeAllowed()) {
       if (!Terminal::HasError()) {
@@ -296,6 +292,8 @@ bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
       return ea.StrategyAdd<Stg_OsMA>(_tfs, _magic_no, _stg);
     case STRAT_PATTERN:
       return ea.StrategyAdd<Stg_Pattern>(_tfs, _magic_no, _stg);
+    case STRAT_PINBAR:
+      return ea.StrategyAdd<Stg_Pinbar>(_tfs, _magic_no, _stg);
     case STRAT_PIVOT:
       return ea.StrategyAdd<Stg_Pivot>(_tfs, _magic_no, _stg);
     case STRAT_RSI:
