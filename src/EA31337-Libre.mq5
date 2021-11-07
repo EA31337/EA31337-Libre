@@ -170,8 +170,6 @@ bool DisplayStartupInfo(bool _startup = false, string sep = "\n") {
   _output += "TERMINAL: " + ea.GetTerminal().ToString() + sep;
   _output += "ACCOUNT: " + ea.Account().ToString() + sep;
   _output += "EA: " + ea.ToString() + sep;
-  _output += "SYMBOL: " + ea.SymbolInfo().ToString() + sep;
-  _output += "MARKET: " + ea.Market().ToString() + sep;
   if (_startup) {
     if (ea.GetState().IsTradeAllowed()) {
       if (!Terminal::HasError()) {
