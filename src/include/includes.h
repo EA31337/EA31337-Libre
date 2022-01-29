@@ -37,6 +37,7 @@
 // Includes indicator classes.
 #include "classes/Indicators/Bitwise/indicators.h"
 #include "classes/Indicators/Price/indicators.h"
+#include "classes/Indicators/Special/indicators.h"
 #include "classes/Indicators/indicators.h"
 
 // Enums.
