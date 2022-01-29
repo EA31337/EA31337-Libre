@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                              EA31337 Libre - Forex trading robot |
-//|                                 Copyright 2016-2021, EA31337 Ltd |
+//|                                 Copyright 2016-2022, EA31337 Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
 
@@ -21,11 +21,11 @@
 
 // EA defines.
 #define ea_name "EA31337 Libre"
-#define ea_version "1.009"
+#define ea_version "1.010"
 #define ea_desc "Forex trading robot"
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"
-#define ea_copy "Copyright 2016-2021, EA31337 Ltd"
+#define ea_copy "Copyright 2016-2022, EA31337 Ltd"
 
 // Other defines.
 //#define __config__  // Loads params from the config files.
