@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                              EA31337 Libre - Forex trading robot |
-//|                                 Copyright 2016-2021, EA31337 Ltd |
+//|                                 Copyright 2016-2022, EA31337 Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
 
@@ -44,6 +44,7 @@ enum ENUM_STRATEGY { // Define list of strategies.
   STRAT_GATOR,       // Gator
   STRAT_HEIKEN_ASHI, // Heiken Ashi
   STRAT_ICHIMOKU,    // Ichimoku
+  STRAT_INDICATOR,   // Indicator
   STRAT_MA,          // MA
   STRAT_MACD,        // MACD
   STRAT_MFI,         // MFI

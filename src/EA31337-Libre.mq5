@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                              EA31337 Libre - Forex trading robot |
-//|                                 Copyright 2016-2021, EA31337 Ltd |
+//|                                 Copyright 2016-2022, EA31337 Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
 
@@ -73,7 +73,7 @@ void OnTick() {
   if (_result.stg_processed_periods > 0) {
     if (EA_DisplayDetailsOnChart && (Terminal::IsVisualMode() || Terminal::IsRealtime())) {
       string _text = StringFormat("%s v%s by %s (%s)\n", ea_name, ea_version, ea_author, ea_link);
-      _text += SerializerConverter::FromObject(ea, SERIALIZER_FLAG_INCLUDE_DYNAMIC).ToString<SerializerJson>();
+      _text += SerializerConverter::FromObject(ea, SERIALIZER_FLAG_INCLUDE_DYNAMIC).Precision(2).ToString<SerializerJson>();
       _text += ea.GetLogger().ToString();
       Comment(_text);
     }
@@ -278,6 +278,8 @@ bool EAStrategyAdd(ENUM_STRATEGY _stg, int _tfs) {
       return ea.StrategyAdd<Stg_HeikenAshi>(_tfs, _magic_no, _stg);
     case STRAT_ICHIMOKU:
       return ea.StrategyAdd<Stg_Ichimoku>(_tfs, _magic_no, _stg);
+    case STRAT_INDICATOR:
+      return ea.StrategyAdd<Stg_Indicator>(_tfs, _magic_no, _stg);
     case STRAT_MA:
       return ea.StrategyAdd<Stg_MA>(_tfs, _magic_no, _stg);
     case STRAT_MACD:
