@@ -5,6 +5,7 @@
 [![Status][gha-image-check-master]][gha-link-check-master]
 [![Status][gha-image-compile-master]][gha-link-compile-master]
 [![Channel][tg-channel-image]][tg-channel-link]
+[![Twitter][twitter-image]][twitter-link]
 
 ## Introduction
 
@@ -15,7 +16,8 @@ EA31337 Libre is free and open-source multi-strategy Forex trading robot written
 The project aims to deliver simple implementation of
 [EA31337 framework][gh-ea31337-classes] and [EA31337 strategies][gh-ea31337-strats].
 
-The source code is compatible with MQL4 and MQL5 and can run on MetaTrader 4 and 5.
+The source code is compatible with MQL4 and MQL5
+and can run on MetaTrader 4 and 5.
 
 ### Usage
 
@@ -82,7 +84,7 @@ these TERMS OF USE and that you agree to be bound by such Terms of Use ("License
 
 ### Copyright information
 
-Copyright © 2016-2021 - EA31337 Ltd - All Rights Reserved
+Copyright © 2016-2022 - EA31337 Ltd - All Rights Reserved
 
 Author & Publisher: kenorb at EA31337 Ltd.
 
@@ -119,6 +121,9 @@ NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PR
 
 [tg-channel-image]: https://img.shields.io/badge/Telegram-join-0088CC.svg?logo=telegram
 [tg-channel-link]: https://t.me/EA31337
+
+[twitter-image]: https://img.shields.io/badge/EA31337-Follow-1DA1F2.svg?logo=Twitter
+[twitter-link]: https://twitter.com/EA31337
 
 [gha-link-check-master]: https://github.com/EA31337/EA31337-Libre/actions?query=workflow%3ACheck+branch%3Amaster
 [gha-image-check-master]: https://github.com/EA31337/EA31337-Libre/workflows/Check/badge.svg?branch=master
