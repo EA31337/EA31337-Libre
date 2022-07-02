@@ -29,7 +29,7 @@ input static string __EA_Strategy__ = "-- Trading strategy --";  // >>> TRADING 
 #else
 input group "Trading strategy"
 #endif
-input ENUM_STRATEGY EA_Strategy = STRAT_ALLIGATOR;  // Strategy
+input ENUM_STRATEGY EA_Strategy = STRAT_PINBAR;  // Strategy
 input unsigned int EA_Strategy_Active_Tf =
     M30B + H1B + H2B + H3B + H4B + H6B + H8B;  // Timeframes (M1=1,M2=2,M5=16,M15=256,M30=1024,H1=2048,H2,H3,H4,H6,H8)
 
