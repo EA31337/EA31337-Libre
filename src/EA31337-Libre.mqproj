@@ -3,7 +3,7 @@
   "program_type":"expert",
   "copyright"   :"Copyright 2016-2022, EA31337 Ltd",
   "link"        :"https:\/\/github.com\/EA31337\/EA31337-Libre",
-  "version"     :"1.010",
+  "version"     :"1.011",
   "description" :"Forex trading robot",
   "optimize"    :"0",
   "fpzerocheck" :"1",
