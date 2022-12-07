@@ -17,5 +17,5 @@ jobs:
           key: pre-commit|${{ hashFiles('.pre-commit-config.yaml') }}
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.9.10
+          python-version: 3.9
       - uses: pre-commit/action@v2.0.3
