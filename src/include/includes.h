@@ -23,7 +23,7 @@
 #include "define.h"
 
 // Includes EA framework.
-#include "classes/Account.mqh"
+#include "classes/Account/Account.h"
 #include "classes/Chart.mqh"
 #include "classes/EA.mqh"
 #include "classes/Log.mqh"
