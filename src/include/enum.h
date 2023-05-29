@@ -47,6 +47,9 @@ enum ENUM_STRATEGY { // Define list of strategies.
   STRAT_INDICATOR,   // Indicator
   STRAT_MA,          // MA
   STRAT_MACD,        // MACD
+  STRAT_META_MIRROR, // (Meta) Mirror
+  STRAT_META_MULTI,  // (Meta) Multi
+  STRAT_META_REVERSAL,// (Meta) Reversal
   STRAT_MFI,         // MFI
   STRAT_MOMENTUM,    // Momentum
   STRAT_OBV,         // OBV

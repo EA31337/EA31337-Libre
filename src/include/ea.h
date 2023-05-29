@@ -51,6 +51,26 @@ class EALibre : public EA {
   EALibre(EAParams &_params) : EA(_params) { Init(); }
 
   /**
+   * Executed on strategy being added.
+   *
+   * <inheritdoc/>
+   *
+   */
+  void OnStrategyAdd(Strategy *_strat) {
+    EA::OnStrategyAdd(_strat);
+    switch (_strat.Get<ENUM_STRATEGY>(STRAT_PARAM_TYPE)) {
+      case STRAT_META_MIRROR:
+        // @todo: Move this logic to strategy.
+        ((Stg_Meta_Mirror *)_strat).SetStrategies(THIS_PTR);
+        break;
+      case STRAT_META_MULTI:
+        // @todo: Move this logic to strategy.
+        ((Stg_Meta_Multi *)_strat).SetStrategies(THIS_PTR);
+        break;
+    }
+  }
+
+  /**
    * "Tick" event handler function.
    *
    * Invoked when a new tick for a symbol is received, to the chart of which the Expert Advisor is attached.
@@ -65,7 +85,7 @@ class EALibre : public EA {
         _text += SerializerConverter::FromObject(THIS_PTR, SERIALIZER_FLAG_INCLUDE_DYNAMIC)
                      .Precision(2)
                      .ToString<SerializerJson>();
-        _text += GetLogger().ToString();
+        _text += logger.ToString();
         Comment(_text);
       }
     }
@@ -77,21 +97,21 @@ class EALibre : public EA {
   bool PrintStartupInfo(bool _startup = false, string sep = "\n") {
     string _output = "";
     ResetLastError();
-    if (ea.GetState().IsOptimizationMode() || (ea.GetState().IsTestingMode() && !ea.GetState().IsVisualMode())) {
+    if (GetState().IsOptimizationMode() || (GetState().IsTestingMode() && !GetState().IsVisualMode())) {
       // Ignore chart updates when optimizing or testing in non-visual mode.
       return false;
     }
-    _output += "TERMINAL: " + ea.GetTerminal().ToString() + sep;
-    _output += "ACCOUNT: " + ea.Account().ToString() + sep;
-    _output += "EA: " + ea.ToString() + sep;
+    _output += "ACCOUNT: " + Account().ToString() + sep;
+    _output += "EA: " + ToString() + sep;
+    _output += "TERMINAL: " + GetTerminal().ToString() + sep;
     if (_startup) {
-      if (ea.GetState().IsTradeAllowed()) {
+      if (Get(STRUCT_ENUM(EAState, EA_STATE_FLAG_TRADE_ALLOWED))) {
         if (!Terminal::HasError()) {
           _output += sep + "Trading is allowed, waiting for new bars...";
         } else {
           _output += sep + "Trading is allowed, but there is some issue...";
           _output += sep + Terminal::GetLastErrorText();
-          ea.GetLogger().AddLastError(__FUNCTION_LINE__);
+          logger.AddLastError(__FUNCTION_LINE__);
         }
       } else if (Terminal::IsRealtime()) {
         _output +=
@@ -163,6 +183,12 @@ class EALibre : public EA {
         return StrategyAdd<Stg_MA>(_tfs, _magic_no, _stg);
       case STRAT_MACD:
         return StrategyAdd<Stg_MACD>(_tfs, _magic_no, _stg);
+      case STRAT_META_MIRROR:
+        return StrategyAdd<Stg_Meta_Mirror>(_tfs, _magic_no, _stg);
+      case STRAT_META_MULTI:
+        return StrategyAdd<Stg_Meta_Multi>(_tfs, _magic_no, _stg);
+      case STRAT_META_REVERSAL:
+        return StrategyAdd<Stg_Meta_Reversal>(_tfs, _magic_no, _stg);
       case STRAT_MFI:
         return StrategyAdd<Stg_MFI>(_tfs, _magic_no, _stg);
       case STRAT_MOMENTUM:
@@ -191,6 +217,11 @@ class EALibre : public EA {
         return StrategyAdd<Stg_WPR>(_tfs, _magic_no, _stg);
       case STRAT_ZIGZAG:
         return StrategyAdd<Stg_ZigZag>(_tfs, _magic_no, _stg);
+      case STRAT_NONE:
+        break;
+      default:
+        SetUserError(ERR_INVALID_PARAMETER);
+        break;
     }
     return _stg == STRAT_NONE;
   }

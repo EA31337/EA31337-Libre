@@ -62,7 +62,7 @@ int OnInit() {
   ea.GetLogger().Flush();
   Chart::WindowRedraw();
   if (!_initiated) {
-    ea.GetState().Enable(false);
+    ea.Set(STRUCT_ENUM(EAState, EA_STATE_FLAG_ENABLED), false);
   }
   return (_initiated ? INIT_SUCCEEDED : INIT_FAILED);
 }

@@ -49,4 +49,4 @@
 
 // Strategy includes.
 INPUT string __Strategy_Parameters__ = "-- Strategy parameters --";  // >>> STRATEGIES <<<
-#include "strategies/strategies.h"
+#include "strategies/includes.h"
