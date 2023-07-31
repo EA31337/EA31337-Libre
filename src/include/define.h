@@ -21,11 +21,11 @@
 
 // EA defines.
 #define ea_name "EA31337 Libre"
-#define ea_version "1.012"
+#define ea_version "1.013"
 #define ea_desc "Forex trading robot"
 #define ea_link "https://github.com/EA31337/EA31337-Libre"
 #define ea_author "kenorb"
-#define ea_copy "Copyright 2016-2022, EA31337 Ltd"
+#define ea_copy "Copyright 2016-2023, EA31337 Ltd"
 
 // Other defines.
 //#define __config__  // Loads params from the config files.
