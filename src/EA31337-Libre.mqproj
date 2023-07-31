@@ -1,9 +1,9 @@
 {
   "platform"    :"mt5",
   "program_type":"expert",
-  "copyright"   :"Copyright 2016-2022, EA31337 Ltd",
+  "copyright"   :"Copyright 2016-2023, EA31337 Ltd",
   "link"        :"https:\/\/github.com\/EA31337\/EA31337-Libre",
-  "version"     :"1.012",
+  "version"     :"1.013",
   "description" :"Forex trading robot",
   "optimize"    :"0",
   "fpzerocheck" :"1",
