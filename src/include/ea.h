@@ -58,16 +58,6 @@ class EALibre : public EA {
    */
   void OnStrategyAdd(Strategy *_strat) {
     EA::OnStrategyAdd(_strat);
-    switch (_strat.Get<ENUM_STRATEGY>(STRAT_PARAM_TYPE)) {
-      case STRAT_META_MIRROR:
-        // @todo: Move this logic to strategy.
-        ((Stg_Meta_Mirror *)_strat).SetStrategies(THIS_PTR);
-        break;
-      case STRAT_META_MULTI:
-        // @todo: Move this logic to strategy.
-        ((Stg_Meta_Multi *)_strat).SetStrategies(THIS_PTR);
-        break;
-    }
   }
 
   /**
@@ -141,6 +131,8 @@ class EALibre : public EA {
         return StrategyAdd<Stg_ADX>(_tfs, _magic_no, _stg);
       case STRAT_AMA:
         return StrategyAdd<Stg_AMA>(_tfs, _magic_no, _stg);
+      case STRAT_ARROWS:
+        return StrategyAdd<Stg_Arrows>(_tfs, _magic_no, _stg);
       case STRAT_ASI:
         return StrategyAdd<Stg_ASI>(_tfs, _magic_no, _stg);
       case STRAT_ATR:
@@ -181,20 +173,34 @@ class EALibre : public EA {
         return StrategyAdd<Stg_Indicator>(_tfs, _magic_no, _stg);
       case STRAT_MA:
         return StrategyAdd<Stg_MA>(_tfs, _magic_no, _stg);
+      case STRAT_MA_CROSS_PIVOT:
+        return StrategyAdd<Stg_MA_Cross_Pivot>(_tfs, _magic_no, _stg);
+      case STRAT_MA_CROSS_SHIFT:
+        return StrategyAdd<Stg_MA_Cross_Shift>(_tfs, _magic_no, _stg);
+      case STRAT_MA_CROSS_SUP_RES:
+        return StrategyAdd<Stg_MA_Cross_Sup_Res>(_tfs, _magic_no, _stg);
       case STRAT_MACD:
         return StrategyAdd<Stg_MACD>(_tfs, _magic_no, _stg);
-      case STRAT_META_MIRROR:
-        return StrategyAdd<Stg_Meta_Mirror>(_tfs, _magic_no, _stg);
-      case STRAT_META_MULTI:
-        return StrategyAdd<Stg_Meta_Multi>(_tfs, _magic_no, _stg);
-      case STRAT_META_REVERSAL:
-        return StrategyAdd<Stg_Meta_Reversal>(_tfs, _magic_no, _stg);
       case STRAT_MFI:
         return StrategyAdd<Stg_MFI>(_tfs, _magic_no, _stg);
       case STRAT_MOMENTUM:
         return StrategyAdd<Stg_Momentum>(_tfs, _magic_no, _stg);
       case STRAT_OBV:
         return StrategyAdd<Stg_OBV>(_tfs, _magic_no, _stg);
+      case STRAT_OSCILLATOR:
+         return StrategyAdd<Stg_Oscillator>(_tfs, _magic_no, _stg);
+      case STRAT_OSCILLATOR_DIVERGENCE:
+         return StrategyAdd<Stg_Oscillator_Divergence>(_tfs, _magic_no, _stg);
+      case STRAT_OSCILLATOR_MULTI:
+         return StrategyAdd<Stg_Oscillator_Multi>(_tfs, _magic_no, _stg);
+      case STRAT_OSCILLATOR_CROSS:
+         return StrategyAdd<Stg_Oscillator_Cross>(_tfs, _magic_no, _stg);
+      case STRAT_OSCILLATOR_CROSS_SHIFT:
+         return StrategyAdd<Stg_Oscillator_Cross_Shift>(_tfs, _magic_no, _stg);
+      case STRAT_OSCILLATOR_CROSS_ZERO:
+         return StrategyAdd<Stg_Oscillator_Cross_Zero>(_tfs, _magic_no, _stg);
+      case STRAT_OSCILLATOR_RANGE:
+         return StrategyAdd<Stg_Oscillator_Range>(_tfs, _magic_no, _stg);
       case STRAT_OSMA:
         return StrategyAdd<Stg_OsMA>(_tfs, _magic_no, _stg);
       case STRAT_PATTERN:
