@@ -6,41 +6,69 @@ on:
   pull_request:
     paths-ignore:
       - '**.md'
+      - '.git*'
   push:
     paths-ignore:
       - '**.md'
+      - '.git*'
 
 jobs:
-  Compile:
+  mt4:
+    name: Installs platform (4)
+    uses: EA31337/EA-Tester/.github/workflows/platform-linux.yml@dev
+    with:
+      artifact_name: mt4
+      version: 4
+  mt5:
+    name: Installs platform (5)
+    uses: EA31337/EA-Tester/.github/workflows/platform-linux.yml@dev
+    with:
+      artifact_name: mt5
+      version: 5
+
+  compile-ea:
     defaults:
       run:
         shell: powershell
         working-directory: src
+    name: Compile EA
+    needs: [mt4, mt5]
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
+      - uses: actions/download-artifact@v4
+        with:
+          name: mt${{ matrix.version }}
+          path: .mt${{ matrix.version }}
       - name: List MQL files
         run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
         shell: powershell
-      - name: Compiles EA (MQL4)
+      - name: Compiles EA
         uses: fx31337/mql-compile-action@master
         with:
-          path: src\EA31337-Libre.mq4
+          mt-path: .mt?
+          path: src\EA31337-Libre.mq${{ matrix.version }}
           verbose: true
 
-      - name: Compiles EA (MQL5)
-        uses: fx31337/mql-compile-action@master
-        with:
-          path: src\EA31337-Libre.mq5
-          verbose: true
       - name: List compiled files
         run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: EA
+          name: EA-Libre.ex${{ matrix.version }}
           path: 'src/*.ex?'
+    strategy:
+      matrix:
+        version: [4, 5]
+  clean-up:
+    name: Clean-up
+    needs: [compile-ea]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geekyeggo/delete-artifact@v4
+        with:
+          name: mt?
