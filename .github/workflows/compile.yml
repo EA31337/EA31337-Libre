@@ -17,13 +17,13 @@ jobs:
     name: Installs platform (4)
     uses: EA31337/EA-Tester/.github/workflows/platform-linux.yml@dev
     with:
-      artifact_name: .mt4
+      artifact_name: mt4
       version: 4
   mt5:
     name: Installs platform (5)
     uses: EA31337/EA-Tester/.github/workflows/platform-linux.yml@dev
     with:
-      artifact_name: .mt5
+      artifact_name: mt5
       version: 5
 
   compile-ea:
@@ -35,28 +35,22 @@ jobs:
     needs: [mt4, mt5]
     runs-on: windows-latest
     steps:
-
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-
       - uses: actions/download-artifact@v4
-
+        with:
+          name: mt${{ matrix.version }}
+          path: .mt${{ matrix.version }}
       - name: List MQL files
         run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
         shell: powershell
-
-      - name: Compiles MQL4
+      - name: Compiles EA
         uses: fx31337/mql-compile-action@master
         with:
-          path: src\EA31337-Libre.mq4
-          verbose: true
-
-      - name: Compiles MQL5
-        uses: fx31337/mql-compile-action@master
-        with:
-          path: src\EA31337-Libre.mq5
+          mt-path: .mt?
+          path: src\EA31337-Libre.mq${{ matrix.version }}
           verbose: true
 
       - name: List compiled files
@@ -65,9 +59,11 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: EA-Libre
+          name: EA-Libre.ex${{ matrix.version }}
           path: 'src/*.ex?'
-
+    strategy:
+      matrix:
+        version: [4, 5]
   clean-up:
     name: Clean-up
     needs: [compile-ea]

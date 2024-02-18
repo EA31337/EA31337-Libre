@@ -12,18 +12,42 @@ on:
 
 jobs:
 
-  compile:
-    name: Compile
-    uses: .github/workflows/compile.yml
+  Compile:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: List MQL files
+        run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
+        shell: powershell
+      - name: Compiles EA (MQL4)
+        uses: fx31337/mql-compile-action@master
+        with:
+          path: src\EA31337-Libre.mq4
+          verbose: true
 
-  backtest:
+      - name: Compiles EA (MQL5)
+        uses: fx31337/mql-compile-action@master
+        with:
+          path: src\EA31337-Libre.mq5
+          verbose: true
+      - name: List compiled files
+        run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: EA
+          path: 'src/*.ex?'
+
+  Backtest:
 
     defaults:
       run:
         shell: bash
 
-    name: Backtest
-    needs: compile
+    needs: Compile
     runs-on: ubuntu-latest
 
     strategy:
