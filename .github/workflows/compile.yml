@@ -13,6 +13,18 @@ on:
       - '.git*'
 
 jobs:
+  checkout:
+    name: Checkout
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Uploads source code
+        uses: actions/upload-artifact@v4
+        with:
+          name: src
+          path: src
   mt4:
     name: Installs platform (4)
     uses: EA31337/EA-Tester/.github/workflows/platform-linux.yml@dev
@@ -30,15 +42,14 @@ jobs:
     defaults:
       run:
         shell: powershell
-        working-directory: src
     name: Compile EA
-    needs: [mt4, mt5]
+    needs: [checkout, mt4, mt5]
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
-          submodules: recursive
+          name: src
+          path: src
       - uses: actions/download-artifact@v4
         with:
           name: mt${{ matrix.version }}
@@ -46,6 +57,7 @@ jobs:
       - name: List MQL files
         run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
         shell: powershell
+
       - name: Compiles EA
         uses: fx31337/mql-compile-action@master
         with:
@@ -60,10 +72,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: EA-Libre.ex${{ matrix.version }}
-          path: 'src/*.ex?'
+          path: src/*.ex?
     strategy:
       matrix:
         version: [4, 5]
+
   clean-up:
     name: Clean-up
     needs: [compile-ea]
