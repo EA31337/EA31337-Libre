@@ -51,4 +51,4 @@ jobs:
           TestDeposit: 10000
           TestExpert: EA31337-Libre.ex5
           TestPeriod: M15
-          UrlExpert: file://EA31337-Libre.ex5
+          UrlExpert: file://${{ github.workspace }}/EA31337-Libre.ex5
