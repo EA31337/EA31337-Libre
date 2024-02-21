@@ -38,6 +38,9 @@ jobs:
     steps:
 
       - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          pattern: EA-Libre.ex?
 
       - name: List compiled files
         run: find . -name "*.ex[45]" -type f
