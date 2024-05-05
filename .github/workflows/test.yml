@@ -60,3 +60,6 @@ jobs:
           TestSymbol: EURUSD
           TestToDate: 2024.01.30
           UrlExpert: file://${{ github.workspace }}/EA31337-Libre.ex5
+      - if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+    timeout-minutes: 20
