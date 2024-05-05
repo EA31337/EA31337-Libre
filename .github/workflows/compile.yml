@@ -1,17 +1,39 @@
 ---
 name: Compile
 
+env:
+  ARTIFACT_PREFIX: ${{ inputs.artifact_prefix || 'mt' }}
+  REPOSITORY: EA31337/EA31337-Libre
+  SKIP_CLEANUP: ${{ inputs.skip_cleanup || false }}
+
 # yamllint disable-line rule:truthy
 on:
   pull_request:
+    branches:
+      - 'master'
+      - '*dev*'
     paths-ignore:
-      - '**.md'
+      - '*.md'
       - '.git*'
   push:
+    branches:
+      - 'master'
+      - '*dev*'
     paths-ignore:
-      - '**.md'
+      - '*.md'
       - '.git*'
   workflow_call:
+    inputs:
+      artifact_prefix:
+        default: mt
+        description: Artifact prefix.
+        required: false
+        type: string
+      skip_cleanup:
+        default: false
+        description: Whether to skip a clean-up job.
+        required: false
+        type: boolean
 
 jobs:
   checkout:
@@ -30,13 +52,18 @@ jobs:
     name: Installs platform (4)
     uses: EA31337/EA-Tester/.github/workflows/platform-linux.yml@dev
     with:
-      artifact_name: mt4
+      artifact_name: ${{ inputs.artifact_prefix || 'mt' }}4
+      artifact_overwrite: true
+      skip_cleanup: true
       version: 4
+
   mt5:
     name: Installs platform (5)
     uses: EA31337/EA-Tester/.github/workflows/platform-linux.yml@dev
     with:
-      artifact_name: mt5
+      artifact_name: ${{ inputs.artifact_prefix || 'mt' }}5
+      artifact_overwrite: true
+      skip_cleanup: true
       version: 5
 
   compile-ea:
@@ -53,22 +80,21 @@ jobs:
           path: src
       - uses: actions/download-artifact@v4
         with:
-          name: mt${{ matrix.version }}
-          path: .mt${{ matrix.version }}
-      - name: List MQL files
+          name: ${{ env.ARTIFACT_PREFIX }}${{ matrix.version }}
+          path: .${{ env.ARTIFACT_PREFIX }}${{ matrix.version }}
+      - name: List all source code files
         run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
-        shell: powershell
-
+      - name: List compiled files
+        run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
       - name: Compiles EA
         uses: fx31337/mql-compile-action@master
         with:
-          mt-path: .mt?
+          mt-path: .${{ env.ARTIFACT_PREFIX }}${{ matrix.version }}
           path: src\EA31337-Libre.mq${{ matrix.version }}
           verbose: true
-
       - name: List compiled files
         run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
-
+      - run: Get-Location
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -77,12 +103,14 @@ jobs:
     strategy:
       matrix:
         version: [4, 5]
+    timeout-minutes: 30
 
-  clean-up:
+  cleanup:
+    if: inputs.skip_cleanup != true
     name: Clean-up
     needs: [compile-ea]
     runs-on: ubuntu-latest
     steps:
-      - uses: geekyeggo/delete-artifact@v4
+      - uses: geekyeggo/delete-artifact@v5
         with:
-          name: mt?
+          name: ${{ env.ARTIFACT_PREFIX }}*
