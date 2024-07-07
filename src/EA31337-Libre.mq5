@@ -1,6 +1,6 @@
 //+------------------------------------------------------------------+
 //|                              EA31337 Libre - Forex trading robot |
-//|                                 Copyright 2016-2022, EA31337 Ltd |
+//|                                 Copyright 2016-2023, EA31337 Ltd |
 //|                                       https://github.com/EA31337 |
 //+------------------------------------------------------------------+
 
@@ -9,14 +9,14 @@
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
-
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  *  GNU General Public License for more details.
-
+ *
  *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 // Includes.
@@ -153,7 +153,13 @@ void OnChartEvent(const int id,          // Event ID.
                   const long &lparam,    // Parameter of type long event.
                   const double &dparam,  // Parameter of type double event.
                   const string &sparam   // Parameter of type string events.
-) {}
+) {
+  if (id == CHARTEVENT_CHART_CHANGE) {
+    // Change of the chart size or modification of chart properties through the Properties dialog.
+    // This is also triggered on ChartRedraw(). Can be used with offline charts.
+    OnTick();
+  }
+}
 
 /**
  * Deinitialize global class variables.
