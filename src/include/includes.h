@@ -27,12 +27,8 @@
 #include "classes/Chart.mqh"
 #include "classes/EA.mqh"
 #include "classes/Log.mqh"
-#include "classes/Order.mqh"
 #include "classes/Pattern.mqh"
-#include "classes/Report.mqh"
 #include "classes/Strategy.mqh"
-#include "classes/SummaryReport.mqh"
-#include "classes/Trade.mqh"
 
 // Includes indicator classes.
 #include "classes/Indicators/Bitwise/indicators.h"
