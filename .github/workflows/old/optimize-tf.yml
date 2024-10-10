@@ -73,7 +73,7 @@ jobs:
       matrix:
         setfile: ${{ fromJson(needs.Process.outputs.sets-list) }}
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           path: .
       - name: Display SET file
@@ -121,7 +121,7 @@ jobs:
           persist-credentials: false
           # Otherwise, you will failed to push refs to dest repo.
           fetch-depth: 0
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: results
           path: .results
