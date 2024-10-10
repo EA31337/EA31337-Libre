@@ -1,11 +1,11 @@
 ---
-name: Optimize Strategies
+name: Optimize Timeframes
 
 # yamllint disable-line rule:truthy
 on:
   push:
     branches:
-      - 'optimize-strats'
+      - 'optimize-tf'
 
 jobs:
   Compile:
@@ -15,8 +15,8 @@ jobs:
         working-directory: src
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: List MQL files
@@ -45,12 +45,12 @@ jobs:
           path: 'src/*.ex?'
   Process:
     env:
-      SETS_DIR: sets/optimize/strats
+      SETS_DIR: sets/optimize/tf
     outputs:
       sets-list: ${{ steps.get-sets.outputs.sets }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set output with list of sets
         id: get-sets
         run: |
@@ -73,7 +73,7 @@ jobs:
       matrix:
         setfile: ${{ fromJson(needs.Process.outputs.sets-list) }}
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           path: .
       - name: Display SET file
@@ -116,12 +116,12 @@ jobs:
     needs: Optimize
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
           # Otherwise, you will failed to push refs to dest repo.
           fetch-depth: 0
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: results
           path: .results

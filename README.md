@@ -6,6 +6,7 @@
 [![Status][gha-image-compile-master]][gha-link-compile-master]
 [![Channel][tg-channel-image]][tg-channel-link]
 [![Twitter][twitter-image]][twitter-link]
+[![Edit][gh-edit-badge]][gh-edit-link]
 
 ## Introduction
 
@@ -112,6 +113,9 @@ ARE ALSO SUBJECT TO THE FACT THAT THEY ARE DESIGNED WITH THE BENEFIT OF HINDSIGH
 NO REPRESENTATION IS BEING MADE THAN ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PROFIT OR LOSSES SIMILAR TO THOSE SHOWN.
 
 <!-- Named links -->
+
+[gh-edit-badge]: https://img.shields.io/badge/GitHub-edit-purple.svg?logo=github
+[gh-edit-link]: https://github.dev/EA31337/EA31337-Libre
 
 [gh-release-image]: https://img.shields.io/github/release/EA31337/EA31337-Libre.svg?logo=github
 [gh-release-link]: https://github.com/EA31337/EA31337-Libre/releases
