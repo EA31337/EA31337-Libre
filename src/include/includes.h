@@ -23,16 +23,12 @@
 #include "define.h"
 
 // Includes EA framework.
-#include "classes/Account/Account.h"
+//#include "classes/Account/Account.h" // To be enabled in the following versions.
 #include "classes/Chart.mqh"
 #include "classes/EA.mqh"
 #include "classes/Log.mqh"
-#include "classes/Order.mqh"
 #include "classes/Pattern.mqh"
-#include "classes/Report.mqh"
 #include "classes/Strategy.mqh"
-#include "classes/SummaryReport.mqh"
-#include "classes/Trade.mqh"
 
 // Includes indicator classes.
 #include "classes/Indicators/Bitwise/indicators.h"
@@ -49,4 +45,4 @@
 
 // Strategy includes.
 INPUT string __Strategy_Parameters__ = "-- Strategy parameters --";  // >>> STRATEGIES <<<
-#include "strategies/strategies.h"
+#include "strategies/includes.h"

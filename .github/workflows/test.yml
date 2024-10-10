@@ -22,67 +22,44 @@ on:
 
 jobs:
 
-  Compile:
-    defaults:
-      run:
-        shell: powershell
-        working-directory: src
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-        with:
-          submodules: recursive
-      - name: List MQL files
-        run: '(Get-ChildItem -Recurse -Path . -Include *.mq[45]).fullname'
-        shell: powershell
-      - name: Compiles EA (MQL4)
-        uses: fx31337/mql-compile-action@master
-        with:
-          path: src\EA31337-Libre.mq4
-          verbose: true
+  compile:
+    name: Compile
+    uses: ./.github/workflows/compile.yml
 
-      - name: Compiles EA (MQL5)
-        uses: fx31337/mql-compile-action@master
-        with:
-          path: src\EA31337-Libre.mq5
-          verbose: true
-      - name: List compiled files
-        run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: EA
-          path: 'src/*.ex?'
-
-  Test:
+  test:
 
     defaults:
       run:
         shell: bash
 
-    needs: Compile
+    name: Test
+    needs: compile
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        month: [1, 2]
-        year: [2020]
 
     steps:
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
-          name: EA
+          merge-multiple: true
+          pattern: EA-Libre.ex?
 
-      - name: Test ${{ matrix.year }}.${{ matrix.month }}
-        uses: fx31337/mql-tester-action@master
+      - name: List compiled files
+        run: find . -name "*.ex[45]" -type f
+
+      - name: Run test
+        uses: fx31337/mql-tester-action@dev
         with:
-          BtDeposit: 10000
-          BtDigits: 5
-          BtMonths: ${{ matrix.month }}
-          BtYears: ${{ matrix.year }}
-          RunOnError: 'show_logs && parse_results $@; exit 0'
-          TestExpert: EA31337-Libre
-          TestPeriod: M1
+          Login: ${{ secrets.MT5_LOGIN }}
+          Password: ${{ secrets.MT5_PASSWORD }}
+          Server: MetaQuotes-Demo
+          TestDeposit: 10000
+          TestExpert: EA31337-Libre.ex5
+          TestFromDate: 2024.01.01
+          TestModel: 1
+          TestPeriod: M15
+          TestSymbol: EURUSD
+          TestToDate: 2024.01.30
+          UrlExpert: file://${{ github.workspace }}/EA31337-Libre.ex5
+      - if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
+    timeout-minutes: 20
